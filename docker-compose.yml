@@ -1,0 +1,63 @@
+services:
+  # PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    restart: unless-stopped
+    tty: true
+    container_name: "${COMPOSE_PROJECT_NAME}_app"
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./laravel/:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - app-network
+
+  # Nginx Service
+  webserver:
+    image: nginx:alpine
+    restart: unless-stopped
+    tty: true
+    container_name: "${COMPOSE_PROJECT_NAME}_webserver"
+    ports:
+      - "${HTTP_PORT}:80"
+    volumes:
+      - ./laravel/:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  # MySQL Service
+  db:
+    image: mysql:8.0.33
+    restart: unless-stopped
+    tty: true
+    container_name: "${COMPOSE_PROJECT_NAME}_db"
+    ports:
+      - "${DB_PORT}:3306"
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - app-network
+    user: "999:999" # Evita problemas de permisos asignando el usuario MySQL
+
+
+# Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
+# Docker Volumes
+volumes:
+  dbdata:
+    driver: local
