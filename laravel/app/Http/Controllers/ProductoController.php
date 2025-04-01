@@ -10,8 +10,15 @@ class ProductoController extends Controller
     public function obtener_productos() {
         return 'Llegamos a la función';
     }
-    public function obtener_producto($id) {
-        return "Producto con ID: " . $id;
+    public function obtener_producto(Request $request) {
+        $id = $request->input('id');
+        $producto = Producto::find($id);
+
+        if (!$producto) {
+            return response()->json(['mensaje' => 'Producto no encontrado'], 404);
+        }
+
+        return response()->json($producto);
     }
 
     public function store(Request $request) {
@@ -23,8 +30,8 @@ class ProductoController extends Controller
         return response()->json($producto, 201);
     }
 
-    public function destroy($id)
-    {
+    public function destroy(Request $request) {
+        $id = $request->input('id');
         $producto = Producto::find($id);
 
         if (!$producto) {
@@ -33,22 +40,22 @@ class ProductoController extends Controller
 
         $producto->delete();
 
-        return response()->json(['mensaje' => 'Producto eliminado'], 200);
+        return response()->json(['mensaje'=> 'Producto eliminado']);
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update (Request $request) {
+        $id = $request->input('id');
         $producto = Producto::find($id);
 
-        if(!$producto) {
+        if (!$producto) {
             return response()->json(['mensaje' => 'Producto no encontrado'], 404);
         }
 
-        $producto->update([
-            'nombre' => $request ->input('nombre'),
-            'precio' => $request ->input('precio'),
+        $producto -> update ([
+            'nombre' => $request -> input ('nombre'),
+            'precio' => $request ->input ('precio'),
         ]);
 
-        return response()->json($producto, 200);
+        return response()->json($producto);
     }
 }
