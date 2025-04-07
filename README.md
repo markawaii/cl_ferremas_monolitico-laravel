@@ -58,7 +58,8 @@ php artisan config:clear
 php artisan route:clear
 
 
-
+#NOTA
+php artisan make:model -> Se crea el modelo indicando el nombre del mismo, se usó el de "Productos", pero si se le agrega -m al mismo comando, creará el modelo y a su vez la migración del mismo modelo.
 
 
 

@@ -11,23 +11,38 @@ class ProductoController extends Controller
         return 'Llegamos a la función';
     }
     public function obtener_producto(Request $request) {
-        $id = $request->input('id');
-        $producto = Producto::find($id);
+        $apikey = $request->header('apikey');
+        if ($apikey !== 'poto') {
+            return response()->json(['status' => 'error', 'message' => 'El APIKey no coincide']);
+    }
+
+
+        // dd($request->all());
+        $producto = Producto::find($request->id);
 
         if (!$producto) {
             return response()->json(['mensaje' => 'Producto no encontrado'], 404);
         }
 
-        return response()->json($producto);
+        return response()->json(['status' => 'success', 'data' => $producto]);
     }
 
     public function store(Request $request) {
+        // dd($request->all());
         $producto = Producto::create([
-            'nombre' => $request->input('nombre'),
-            'precio' => $request->input('precio'),
+            'name' => $request->input('nombre'),
+            'price' => $request->input('precio'),
+            'description' => $request->input('description'),
+            'active' => $request->input('active') ? true:false,
+            'stock' => $request->input('stock'),
+            'sku' => $request->input('sku')
         ]);
 
-        return response()->json($producto, 201);
+        $respuesta = [
+            'producto_id' => $producto->id,
+        ];
+
+        return response()->json(['status' => 'success', 'message' => 'Producto creado correctamente' , 'data' => $respuesta]);
     }
 
     public function destroy(Request $request) {
