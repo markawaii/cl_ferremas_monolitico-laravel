@@ -15,9 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('rut');
+            $table->string('passport');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('active')->default(true);
+            $table->string('address');
+            $table->string('city');
+            $table->string('birth_date');  
+            $table->string('gender');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes()->comment('Ignora a los usuarios eliminados cuando se hace una consulta de base de datos');

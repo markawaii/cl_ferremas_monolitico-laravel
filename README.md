@@ -46,7 +46,7 @@ El repositorio contiene los siguientes directorios:
 - 6 Ejecute el comando `docker exec -it ferremas_app /bin/bash`.
 - 7 Dentro del contenedor, ejecute el comando `composer install`.
 - 8 Dentro del contenedor, ejecute el comando `php artisan migrate:fresh --seed`.
-- 9 Dentro del contenedor, ejecute el comando `php artisan optimize`.
+- 9 Dentro del contenedor, ejecute el comando `php artisan optimize`. 
 - 10 Si no ha cambiado la dirección, utilice la siguiente URL para visualizar el proyecto: `http://localhost`.
 - 1 Una vez que se hayan completado estos pasos, la aplicación Laravel debería estar lista para su uso.
 

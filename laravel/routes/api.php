@@ -5,13 +5,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\MarcaController;
 
-Route::controller(ProductoController::class)->prefix('productos')->group(function () {
-    Route::get('obtener', 'obtener_productos');
-    Route::get('obtener-uno','obtener_producto');
-    Route::post('crear', 'store');
-    Route::put('actualizar', 'update');
-    Route::delete('eliminar', 'destroy');
-});
-Route::apiResource('usuarios', UsuarioController::class);
-Route::apiResource('pedidos', PedidoController::class);
+
+Route::get('/producto/obtener', [ProductoController::class, 'obtener_productos']);
+Route::post('/producto/crear', [ProductoController::class, 'store']);
+Route::put('/producto', [ProductoController::class, 'update' ]);
+Route::delete('/producto', [ProductoController::class, 'destroy']);
+
+// Route::controller(ProductoController::class)->prefix('productos')->group(function () {
+//     // Route::get('obtener', 'obtener_productos');
+//     // Route::post('crear', 'store');
+//     // Route::put('actualizar', 'update');
+//     // Route::delete('eliminar', 'destroy');
+// });
+// Route::controller(MarcaController::class)->prefix('marca')->group(function () {
+//     Route::post('crear', 'crear_marca');
+// });

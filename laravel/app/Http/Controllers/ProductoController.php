@@ -4,31 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Models\Marca;
 
 class ProductoController extends Controller
 {
     public function obtener_productos() {
         return 'Llegamos a la función';
     }
-    public function obtener_producto(Request $request) {
-        $apikey = $request->header('apikey');
-        if ($apikey !== 'poto') {
-            return response()->json(['status' => 'error', 'message' => 'El APIKey no coincide']);
-    }
-
-
-        // dd($request->all());
-        $producto = Producto::find($request->id);
-
-        if (!$producto) {
-            return response()->json(['mensaje' => 'Producto no encontrado'], 404);
-        }
-
-        return response()->json(['status' => 'success', 'data' => $producto]);
-    }
 
     public function store(Request $request) {
         // dd($request->all());
+
+        $marca = Marca::where('id', $request->input('marca_id'))->where('active', true)->first();
+
+        if(!$marca) {
+            return response()->json(['status' => 'error', 'message' 'La marca no existe o está inactiva'], 404);
+        }
+
         $producto = Producto::create([
             'name' => $request->input('nombre'),
             'price' => $request->input('precio'),
