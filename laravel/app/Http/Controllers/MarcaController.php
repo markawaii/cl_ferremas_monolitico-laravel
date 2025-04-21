@@ -7,21 +7,18 @@ use App\Models\Marca;
 
 class MarcaController extends Controller
 {
-    public function crear_mamrca() {
-        dd('Llegamosa la función');
-    }
-
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $marca = Marca::create([
-            'name' =>$request->input('nombre'),
-            'description' =>$request->input('descripcion'),
-            'active' =>$request->input('active') ? true:false
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'active' => $request->input('active') ? true : false,
         ]);
 
-        $respuesta = {
+        $respuesta = [
             'brand_id' => $marca->id,
-        };
+        ];
 
-        return response ()->json(['status' =>'success', 'message' => 'Marca creada correctamente' , 'data' => $respuesta]);
+        return response()->json(['status' => 'success','message' => 'Marca creada correctamente', 'data' => $respuesta,]);
     }
 }

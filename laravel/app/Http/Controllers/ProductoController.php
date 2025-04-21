@@ -9,7 +9,8 @@ use App\Models\Marca;
 class ProductoController extends Controller
 {
     public function obtener_productos() {
-        return 'Llegamos a la función';
+        // return 'Llegamos a la función';
+        dd('Funciona');
     }
 
     public function store(Request $request) {
@@ -18,7 +19,7 @@ class ProductoController extends Controller
         $marca = Marca::where('id', $request->input('marca_id'))->where('active', true)->first();
 
         if(!$marca) {
-            return response()->json(['status' => 'error', 'message' 'La marca no existe o está inactiva'], 404);
+            return response()->json(['status' => 'error', 'message' => 'La marca no existe o está inactiva'], 404);
         }
 
         $producto = Producto::create([
