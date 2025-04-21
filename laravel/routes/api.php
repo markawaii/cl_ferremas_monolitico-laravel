@@ -15,6 +15,8 @@ Route::delete('/producto', [ProductoController::class, 'destroy']);
 
 
 Route::post('/marca/crear', [MarcaController::class, 'store']);
+Route::put('/marca/{id}', [MarcaController::class, 'update']);
+Route::delete('/marca/{id}', [MarcaController::class, 'destroy']);
 
 // Route::controller(ProductoController::class)->prefix('productos')->group(function () {
 //     // Route::get('obtener', 'obtener_productos');

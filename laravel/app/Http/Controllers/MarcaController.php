@@ -21,4 +21,34 @@ class MarcaController extends Controller
 
         return response()->json(['status' => 'success','message' => 'Marca creada correctamente', 'data' => $respuesta,]);
     }
+
+    public function destroy($id)
+    {
+        $marca = Marca::find($id);
+
+        if (!$marca) {
+            return response()->json(['status' => 'error', 'message' => 'Marca no encontrada'], 404);
+        }
+
+        $marca -> delete();
+
+        return response()->json(['status' => 'success','message' => 'Marca eliminada correctamente']);
+    }
+
+    public function update (Request $request, $id)
+    {
+        $marca = Marca::find($id);
+
+        if (!$marca) {
+            return response()->json(['status' => 'error', 'message' => 'Marca no encontrada'], 404);
+        }
+
+        $marca->update ([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'active' => $request->input('active') ? true : false,
+        ]);
+
+        return response()->json(['status' => 'success', 'message' => 'Marca actualizada correctamente', 'data' => $marca]);
+    }
 }
