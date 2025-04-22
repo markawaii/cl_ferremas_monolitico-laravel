@@ -19,7 +19,7 @@ class MarcaController extends Controller
             'brand_id' => $marca->id,
         ];
 
-        return response()->json(['status' => 'success','message' => 'Marca creada correctamente', 'data' => $respuesta,]);
+        return response()->json(['status' => 'success','message' => 'Marca creada correctamente', 'data' => $respuesta]);
     }
 
     public function destroy($id)

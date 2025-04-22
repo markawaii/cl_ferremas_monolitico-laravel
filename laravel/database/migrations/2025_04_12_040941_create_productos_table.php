@@ -19,8 +19,8 @@ return new class extends Migration
             $table->boolean('active')->default(false);
             $table->string('stock');
             $table->string('sku');
-            $table->unsignedBigInteger('price_record_id');
-            $table->unsignedBigInteger('prod_type_id');
+            // $table->unsignedBigInteger('price_record_id');
+            // $table->unsignedBigInteger('prod_type_id');
             $table->unsignedBigInteger('brand_id');
             $table->timestamps();
 /*

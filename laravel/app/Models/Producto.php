@@ -15,6 +15,12 @@ class Producto extends Model
         'description',
         'active',
         'stock',
-        'sku'
+        'sku',
+        'brand_id'
     ];
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class, 'brand_id');
+    }
 }
