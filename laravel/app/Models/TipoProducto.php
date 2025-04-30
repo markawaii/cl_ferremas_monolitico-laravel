@@ -9,5 +9,5 @@ class TipoProducto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre' , 'status'];
+    protected $fillable = ['nombre' , 'active'];
 }

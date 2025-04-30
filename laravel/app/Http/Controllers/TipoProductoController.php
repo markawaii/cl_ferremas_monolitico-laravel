@@ -9,7 +9,6 @@ class TipoProductoController extends Controller
 {
     public function obtener_tipoprod()
     {
-        dd('Se llegó a la función');
         $tipos = TipoProducto::all();
 
         return response()->json(['status' => 'success', 'data' => $tipos]);
@@ -17,28 +16,30 @@ class TipoProductoController extends Controller
 
     public function store(Request $request)
     {
-        dd('Se llegó a la store');
-        $tipo = TipoProducto::create($request->all());
+        $request->validate(['nombre'=>'required|string|max:255', 'active' => 'required|boolean',]);
 
-        return response()->json(['status' => 'success', 'message' => 'Tipo creado', 'data' => $tipo]);
+
+        $tipo = TipoProducto::create($request->only('nombre', 'status'));
+
+        return response()->json(['status' => 'success', 'message' => 'Tipo de producto creado correctamente.', 'data' => $tipo]);
     }
 
     public function update(Request $request, $id)
     {
-        dd('Se llegó a la update');
         $tipo = TipoProducto::find($id);
 
         if (!$tipo) {
             return response()->json(['status' => 'error', 'message' => 'Tipo no encontrado'], 404);
         }
 
-        $tipo->update($request->all());
-        return response()->json(['status' => 'success', 'message' => 'Tipo actualizado', 'data' => $tipo]);
+        $request->validate(['nombre' => 'sometimes|required|string|max:255', 'active' => 'sometimes|required|boolean',]);
+
+        $tipo->update($request->only('nombre', 'active'));
+        return response()->json(['status' => 'success', 'message' => 'Tipo de producto actualizado correctamente.', 'data' => $tipo]);
     }
 
     public function destroy($id)
     {
-        dd('Se llegó a destroy');
         $tipo = TipoProducto::find($id);
 
         if (!$tipo) {
