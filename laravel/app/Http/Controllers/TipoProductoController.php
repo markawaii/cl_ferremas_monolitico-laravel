@@ -49,4 +49,10 @@ class TipoProductoController extends Controller
         $tipo->delete();
         return response()->json(['status' => 'success', 'message' => 'Tipo eliminado']);
     }
+
+    public function index()
+    {
+        $tipos = TipoProducto::all();
+        return view('components.tipos.index', compact('tipos'));
+    }
 }

@@ -30,7 +30,7 @@ class MarcaController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Marca no encontrada'], 404);
         }
 
-        $marca -> delete();
+        $marca->delete();
 
         return response()->json(['status' => 'success','message' => 'Marca eliminada correctamente']);
     }
@@ -51,4 +51,11 @@ class MarcaController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Marca actualizada correctamente', 'data' => $marca]);
     }
+
+    public function index()
+{
+    $marcas = Marca::all();
+    return view('components.marcas.index', compact('marcas'));
+}
+
 }

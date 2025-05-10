@@ -56,8 +56,8 @@ class ProductoController extends Controller
         return response()->json(['message'=> 'Producto eliminado']);
     }
 
-    public function update (Request $request) {
-        $id = $request->input('id');
+    public function update (Request $request, $id) {
+
         $producto = Producto::find($id);
 
         if (!$producto) {
@@ -65,14 +65,19 @@ class ProductoController extends Controller
         }
 
         $producto -> update ([
-            'name' => $request -> input ('name'),
-            'price' => $request ->input ('price'),
-            'description' => $request -> input ('description'),
-            'stock' => $request -> input ('stock'),
-            'sku' => $request -> input ('sku'),
-            'active' => $request ->input('active') ? true:false,
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'stock' => $request->input('stock'),
+            'sku' => $request->input('sku'),
+            'active' => $request->input('active') ? true : false,
         ]);
 
         return response()->json($producto);
+    }
+
+    public function index() {
+        $productos = Producto::all();
+        return view('components.productos.index', compact('productos'));
     }
 }
