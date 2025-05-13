@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Marca;
+use App\Models\TipoProducto;
 
 class ProductoController extends Controller
 {
@@ -34,6 +35,7 @@ class ProductoController extends Controller
             'stock' => $request->input('stock'),
             'sku' => $request->input('sku'),
             'brand_id' => $marca->id,
+            'type_id' =>$request->input('type_id'),
         ]);
 
         $respuesta = [
@@ -56,28 +58,37 @@ class ProductoController extends Controller
         return response()->json(['message'=> 'Producto eliminado']);
     }
 
-    public function update (Request $request, $id) {
+    public function update(Request $request, $id)
+        {
+            if ($request->method() !== 'PUT') {
+                return response()->json(['error' => 'Método no permitido'], 405);
+            }
 
-        $producto = Producto::find($id);
+            // sigue igual:
+            $producto = Producto::find($id);
 
-        if (!$producto) {
-            return response()->json(['message' => 'Producto no encontrado'], 404);
+            if (!$producto) {
+                return response()->json(['message' => 'Producto no encontrado'], 404);
+            }
+
+            $producto->update([
+                'name' => $request->input('name'),
+                'price' => $request->input('price'),
+                'description' => $request->input('description'),
+                'stock' => $request->input('stock'),
+                'sku' => $request->input('sku'),
+                'active' => $request->input('active') ? true : false,
+                'brand_id' => $request->input('brand_id'),
+                'type_id' => $request->input('type_id'),
+            ]);
+
+            return response()->json($producto);
         }
-
-        $producto -> update ([
-            'name' => $request->input('name'),
-            'price' => $request->input('price'),
-            'description' => $request->input('description'),
-            'stock' => $request->input('stock'),
-            'sku' => $request->input('sku'),
-            'active' => $request->input('active') ? true : false,
-        ]);
-
-        return response()->json($producto);
-    }
 
     public function index() {
         $productos = Producto::all();
-        return view('components.productos.index', compact('productos'));
+        $marcas = Marca::all();
+        $tipos = TipoProducto::all();
+        return view('components.productos.index', compact('productos', 'marcas', 'tipos'));
     }
 }

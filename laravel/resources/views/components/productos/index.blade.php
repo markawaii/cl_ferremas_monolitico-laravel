@@ -11,11 +11,22 @@
     <label>Stock:</label>
     <input type="number" name="stock" required>
 
+    <label>SKU:</label>
+    <input type="text" name="sku" required>
+
     <label>Marca:</label>
-    <input type="number" name="brand_id" required>
+    <select name="brand_id">
+        @foreach($marcas as $marca)
+            <option value="{{ $marca->id }}">{{ $marca->name }}</option>
+        @endforeach
+    </select>
 
     <label>Tipo Producto:</label>
-    <input type="number" name="tipo_producto_id" required>
+    <select name="type_id">
+        @foreach($tipos as $tipo)
+            <option value="{{ $tipo->id }}">{{ $tipo->nombre }}</option>
+        @endforeach
+    </select>
 
     <label>Activo:</label>
     <select name="active">

@@ -23,13 +23,3 @@ Route::delete('/tipoproducto/{id}', [TipoProductoController::class, 'destroy']);
 Route::post('/marca/crear', [MarcaController::class, 'store']);
 Route::put('/marca/{id}', [MarcaController::class, 'update']);
 Route::delete('/marca/{id}', [MarcaController::class, 'destroy']);
-
-// Route::controller(ProductoController::class)->prefix('productos')->group(function () {
-//     // Route::get('obtener', 'obtener_productos');
-//     // Route::post('crear', 'store');
-//     // Route::put('actualizar', 'update');
-//     // Route::delete('eliminar', 'destroy');
-// });
-// Route::controller(MarcaController::class)->prefix('marca')->group(function () {
-//     Route::post('crear', 'crear_marca');
-// });

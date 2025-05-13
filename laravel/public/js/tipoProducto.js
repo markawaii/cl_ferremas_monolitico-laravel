@@ -19,7 +19,7 @@ document.getElementById('tipoForm').addEventListener('submit', function(e) {
 
         if (data.status === 'success') {
             let row = `
-                <tr data-id="${data.data.id}">
+                <tr data-id="z${data.data.id}">
                     <td>${data.data.id}</td>
                     <td>${data.data.nombre}</td>
                     <td>
