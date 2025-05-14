@@ -12,8 +12,8 @@ use App\Http\Controllers\TipoProductoController;
 
 Route::get('/producto/obtener', [ProductoController::class, 'obtener_productos']);
 Route::post('/producto/crear', [ProductoController::class, 'store']);
-Route::put('/producto/{id}', [ProductoController::class, 'update' ]);
-Route::delete('/producto{id}', [ProductoController::class, 'destroy']);
+Route::put('/producto/{id}', [ProductoController::class, 'update']);
+Route::delete('/producto/{id}', [ProductoController::class, 'destroy']);
 
 Route::get('/tipoproducto/obtener', [TipoProductoController::class, 'obtener_tipoprod']);
 Route::post('/tipoproducto/crear', [TipoProductoController::class, 'store']);

@@ -1,3 +1,5 @@
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <form id="productoForm">
     <label>Nombre:</label>
     <input type="text" name="name" required>
@@ -58,7 +60,5 @@
         @endforeach
     </tbody>
 </table>
-
-<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <script src="{{ asset('js/producto.js') }}"></script>

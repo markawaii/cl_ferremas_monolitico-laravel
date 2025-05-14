@@ -60,11 +60,6 @@ class ProductoController extends Controller
 
     public function update(Request $request, $id)
         {
-            if ($request->method() !== 'PUT') {
-                return response()->json(['error' => 'Método no permitido'], 405);
-            }
-
-            // sigue igual:
             $producto = Producto::find($id);
 
             if (!$producto) {
