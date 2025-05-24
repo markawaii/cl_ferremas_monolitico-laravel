@@ -1,15 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TipoProductoController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\TipoProductoController;
 
 
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/tipos', [TipoProductoController::class, 'index'])->name('tipos.index');
 Route::post('/tipos', [TipoProductoController::class, 'store'])->name('tipos.store');
 Route::put('/tipos/{id}', [TipoProductoController::class, 'update'])->name('tipos.update');
