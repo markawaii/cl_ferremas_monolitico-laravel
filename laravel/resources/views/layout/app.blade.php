@@ -47,6 +47,9 @@
             <!--  Header End -->
             <div class="body-wrapper-inner">
                 @yield('content')
+
+
+                lksdfjsdf
                 {{-- <div class="container-fluid">
 
 

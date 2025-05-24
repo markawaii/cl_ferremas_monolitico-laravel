@@ -12,7 +12,7 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        return view('pages.admin.producto.index');
+        return view('pages.producto.index');
     }
 
     // public function create(){
