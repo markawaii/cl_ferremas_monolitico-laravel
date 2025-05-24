@@ -2,7 +2,7 @@
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./index.html" class="navbar-brand">
+                    <a href="{{ route('home.index')}}" class="navbar-brand">
                         <span class="fs-7 fw-bold text-dark">Ferremas</span>
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -17,19 +17,19 @@
                             <span class="hide-menu">Administración</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('productos.index') }}" aria-expanded="false">
                                 <i class="ti ti-atom"></i>
                                 <span class="hide-menu">Producto</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('marcas.index') }}" aria-expanded="false">
                                 <i class="ti ti-atom"></i>
                                 <span class="hide-menu">Marca</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('tipos.index') }}" aria-expanded="false">
                                 <i class="ti ti-atom"></i>
                                 <span class="hide-menu">Tipo Producto</span>
                             </a>

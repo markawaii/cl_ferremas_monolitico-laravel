@@ -46,6 +46,7 @@
             @include('layout.sidebar')
             <!--  Header End -->
             <div class="body-wrapper-inner">
+                @yield('content')
                 <div class="container-fluid">
 
                     {{-- @include('layout.footer') --}}
