@@ -11,7 +11,7 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        return view('components.productos.index');
+        return view('pages.producto.index');
     }
 
     public function obtener_productos()
