@@ -46,19 +46,16 @@
             @include('layout.sidebar')
             <!--  Header End -->
             <div class="body-wrapper-inner">
-                @yield('content')
+                {{-- <div class="container-fluid"> --}}
 
+                    @yield('content')
 
-                lksdfjsdf
-                {{-- <div class="container-fluid">
-
-
-                </div> --}}
+                {{-- </div> --}}
                 {{-- @include('layout.footer') --}}
             </div>
         </div>
     </div>
-        @include('layout.scripts')
+    @include('layout.scripts')
 </body>
 
 </html>
