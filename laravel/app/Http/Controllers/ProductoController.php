@@ -6,13 +6,22 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Marca;
 use App\Models\TipoProducto;
+use App\Services\productoService;
 use GuzzleHttp\Promise\Create;
 
 class ProductoController extends Controller
 {
+    public function __construct(productoService $productoService)
+    {
+
+        $this->productoService = $productoService;
+    }
+
     public function index()
     {
-        return view('pages.producto.index');
+        $productos = $this->productoService->obtenerTodos();
+        dd($productos);
+        return view('pages.admin.producto.index');
     }
 
     // public function create(){

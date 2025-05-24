@@ -3,18 +3,36 @@
 @section('content')
     <div class="container-fluid">
 
-        <div class="mt-4 pb-3 d-flex align-items-center">
-            <span class="btn btn-primary rounded-circle round-48 hstack justify-content-center">
-                <i class="ti ti-shopping-cart fs-6"></i>
-            </span>
-            <div class="ms-3">
-                <h5 class="mb-0 fw-bolder fs-4">Top Sales</h5>
-                <span class="text-muted fs-3">Johnathan Doe</span>
-            </div>
-            <div class="ms-auto">
-                <span class="badge bg-secondary-subtle text-muted">+68%</span>
-            </div>
-        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>@social</td>
+                </tr>
+            </tbody>
+        </table>
 
     </div>
 @endsection
