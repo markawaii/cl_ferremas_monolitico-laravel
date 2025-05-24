@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 
+
 <head>
     @include('layout.head')
 </head>
@@ -47,7 +48,7 @@
             <div class="body-wrapper-inner">
                 <div class="container-fluid">
 
-                    @include('layout.footer')
+                    {{-- @include('layout.footer') --}}
 
                 </div>
             </div>
