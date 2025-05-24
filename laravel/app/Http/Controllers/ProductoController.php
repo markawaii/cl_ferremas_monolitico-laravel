@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Marca;
 use App\Models\TipoProducto;
+use GuzzleHttp\Promise\Create;
 
 class ProductoController extends Controller
 {
@@ -13,6 +14,31 @@ class ProductoController extends Controller
     {
         return view('pages.producto.index');
     }
+
+    // public function create(){
+    //     dd('llegue al create');
+    // }
+
+    // public function store(){
+    //     dd('llegue al create');
+    // }
+
+    // public function show(){
+    //     dd('llegue al create');
+    // }
+
+    // public function edit(){
+    //     dd('llegue al create');
+    // }
+
+    // public function update(){
+    //     dd('llegue al create');
+    // }
+
+    // public function delete(){
+    //     dd('llegue al create');
+
+    // }
 
     public function obtener_productos()
     {
