@@ -19,9 +19,9 @@ class ProductoController extends Controller
 
     public function index()
     {
-        $productos = $this->productoService->obtenerTodos();
-        dd($productos);
-        return view('pages.admin.producto.index');
+        $response = $this->productoService->obtenerTodos();
+        $productos =$response['data'];
+        return view('pages.admin.producto.index', compact('productos'));
     }
 
     // public function create(){

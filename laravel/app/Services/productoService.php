@@ -1,18 +1,26 @@
 <?php
+
 namespace App\Services;
+
 use Illuminate\Support\Facades\Http;
+use Exception;
 
 
 class productoService
 {
     public function obtenerTodos()
     {
-        $response = Http::get('http://localhost/api/producto/obtener');
+        try {
+            $response = Http::get('http://host.docker.internal/api/producto/obtener')->json();
 
-        if ($response->successful()) {
-            return $response->json();
+            if (!isset($response['status']) || $response['status'] !== 'success') {
+                return false;
+            }
+
+            return $response;
+        } catch (Exception $e) {
+            echo 'Excepcion capturada: ', $e->getMessage();
+            return false;
         }
-
-        return "Error: " . $response->status();
     }
 }
