@@ -21,7 +21,8 @@ Route::put('/marcas/{id}', [MarcaController::class, 'update'])->name('marcas.upd
 Route::delete('/marcas/{id}', [MarcaController::class, 'destroy'])->name('marca.destroy');
 
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
-Route::post('/productos/crear', [ProductoController::class, 'store'])->name('productos.store');
-Route::post('/productos/actualizar/{id}', [ProductoController::class, 'update'])->name('productos.update');
-Route::delete('/producto/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+Route::get('productos/create', [ProductoController::class, 'create'])->name('productos.create');
+Route::post('/productos/store', [ProductoController::class, 'store'])->name('productos.store');
+Route::post('/productos/update/{id}', [ProductoController::class, 'update'])->name('productos.update');
+Route::delete('/producto/delete{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
 Route::get('/productos/obtener', [ProductoController::class, 'obtener_productos'])->name('productos.obtener');

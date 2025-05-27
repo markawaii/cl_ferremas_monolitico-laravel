@@ -23,10 +23,13 @@ class ProductoController extends Controller
         $productos =$response['data'];
         return view('pages.admin.producto.index', compact('productos'));
     }
+    public function create()
+    {
+        $marcas = Marca::where('active', true)->get();
+        $tipos = TipoProducto::all();
+        return view('pages.admin.producto.create', compact('marcas', 'tipos'));
+    }
 
-    // public function create(){
-    //     dd('llegue al create');
-    // }
 
     // public function store(){
     //     dd('llegue al create');
