@@ -63,7 +63,7 @@ class ProductoController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function crear_producto(Request $request)
     {
         // dd($request->all());
 
@@ -91,7 +91,7 @@ class ProductoController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Producto creado correctamente', 'data' => $respuesta]);
     }
 
-    public function destroy(Request $request)
+    public function eliminar_producto(Request $request)
     {
         $id = $request->input('id');
         $producto = Producto::find($id);
@@ -105,7 +105,7 @@ class ProductoController extends Controller
         return response()->json(['message' => 'Producto eliminado']);
     }
 
-    public function update(Request $request, $id)
+    public function modificar_producto(Request $request, $id)
     {
         $producto = Producto::find($id);
 

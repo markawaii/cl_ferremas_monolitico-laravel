@@ -14,7 +14,7 @@ class TipoProductoController extends Controller
         return response()->json(['status' => 'success', 'data' => $tipos]);
     }
 
-    public function store(Request $request)
+    public function crear_tipoprod(Request $request)
     {
         $request->validate(['nombre'=>'required|string|max:255', 'active' => 'required|boolean',]);
 
@@ -24,7 +24,7 @@ class TipoProductoController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Tipo de producto creado correctamente.', 'data' => $tipo]);
     }
 
-    public function update(Request $request, $id)
+    public function modificar_tipoprod(Request $request, $id)
     {
         $tipo = TipoProducto::find($id);
 
@@ -38,7 +38,7 @@ class TipoProductoController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Tipo de producto actualizado correctamente.', 'data' => $tipo]);
     }
 
-    public function destroy($id)
+    public function eliminar_tipoprod($id)
     {
         $tipo = TipoProducto::find($id);
 
@@ -48,11 +48,5 @@ class TipoProductoController extends Controller
 
         $tipo->delete();
         return response()->json(['status' => 'success', 'message' => 'Tipo eliminado']);
-    }
-
-    public function index()
-    {
-        $tipos = TipoProducto::all();
-        return view('components.tipos.index', compact('tipos'));
     }
 }
