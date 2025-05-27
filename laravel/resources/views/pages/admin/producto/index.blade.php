@@ -1,75 +1,47 @@
 @extends('layout.app')
 
-@section('title', 'Productos en Blade')
+@section('title', 'Lista de Productos')
 
 @section('content')
-    <div class="container mt-4">
-        <h2 class="mb-4">Lista de Productos</h2>
+<div class="container-fluid">
+    <h2 class="mb-4">Productos Registrados</h2>
 
-        <div class="row">
+    <table class="table table-bordered table-hover text-center align-middle">
+        <thead class="table">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>SKU</th>
+                <th>Marca</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach ($productos as $producto)
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body">
-                            <div class="col-12 col-lg-6 col-xl">
-                                    <h5 class="fw-bold text-primary text-dark mb-2">{{ $producto['name'] }}</h5>
-                                <p class="card-text text-success fw-semibold mb-1">Precio:${{ number_format($producto['price'], 0, ',', '.') }}</p>
-                                <p class="text-muted small mb-2">{{ $producto['description'] }}</p>
-                                <div class="mb-2">
-                                    <span class="badge bg-primary me-1">Stock: {{ $producto['stock'] }}</span>
-                                    <span class="badge bg-primary">SKU: {{ $producto['sku'] }}</span>
-                                </div>
-                                <p class="text-muted mb-0">Marca: {{ $producto['marca']['name'] }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <tr>
+                    <td>{{ $producto['id'] }}</td>
+                    <td>{{ $producto['name'] }}</td>
+                    <td>${{ number_format($producto['price'], 0, ',', '.') }}</td>
+                    <td>{{ $producto['stock'] }}</td>
+                    <td>{{ $producto['sku'] }}</td>
+                    <td>{{ $producto['brand_id']}}</td>
+                    <td>
+                        @if ($producto['active'])
+                            <span class="badge bg-success">Activo</span>
+                        @else
+                            <span class="badge bg-secondary">Inactivo</span>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-info">Ver</a>
+                        <a href="#" class="btn btn-sm btn-info">Editar</a>
+                    </td>
+                </tr>
             @endforeach
-        </div>
-    </div>
+        </tbody>
+    </table>
+</div>
 @endsection
-{{-- <div class="container-fluid">
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>@social</td>
-                </tr>
-            </tbody>
-        </table>
-
-    </div> --}}
-{{-- <div class="col-4">
-    <div class="p-3 m-2 bg-info text-white p-3">
-        <h1>Lista de Productos</h1> <br>
-
-    ];
-
-            foreach ($productos as $producto) {
-                echo "<p>{$producto['nombre']} - \${$producto['precio']}</p>";
-            }
-    </div>
-</div> --}}
