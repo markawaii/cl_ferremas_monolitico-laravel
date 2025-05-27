@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
 
         <table class="table">
             <thead>
@@ -34,5 +34,23 @@
             </tbody>
         </table>
 
+    </div> --}}
+    <div class="col-4">
+    <div class="p-3 m-2 bg-info text-white p-3">
+        <h1>Lista de Productos</h1> <br>
+        <?php
+            $productos = [
+                ['nombre' => 'Martillo', 'precio' => 5990],
+                ['nombre' => 'Taladro', 'precio' => 5990],
+                ['nombre' => 'Serrucho', 'precio' => 5990],
+    ];
+
+            foreach ($productos as $producto) {
+                echo "<p>{$producto['nombre']} - \${$producto['precio']}</p>";
+            }
+        ?>
     </div>
+</div>
+
+
 @endsection
