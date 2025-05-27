@@ -10,15 +10,17 @@
             @foreach ($productos as $producto)
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm h-100">
-                        <div class="card-body d-flex flex-column justify-content-between">
-                            <h5 class="card-title fw-bold text-dark mb-2">{{ $producto['name'] }}</h5>
-                            <p class="card-text text-success fw-semibold mb-1">Precio: ${{ number_format($producto['price'], 0, ',', '.') }}</p>
-                            <p class="text-muted small mb-2">{{ $producto['description']}}</p>
-                            <div class="mb-2">
-                                <span class="badge bg-primary me-1">Stock: {{ $producto['stock'] }}</span>
-                                <span class="badge bg-primary">SKU: {{ $producto['sku'] }}</span>
+                        <div class="card-body">
+                            <div class="col-12 col-lg-6 col-xl">
+                                    <h5 class="fw-bold text-primary text-dark mb-2">{{ $producto['name'] }}</h5>
+                                <p class="card-text text-success fw-semibold mb-1">Precio:${{ number_format($producto['price'], 0, ',', '.') }}</p>
+                                <p class="text-muted small mb-2">{{ $producto['description'] }}</p>
+                                <div class="mb-2">
+                                    <span class="badge bg-primary me-1">Stock: {{ $producto['stock'] }}</span>
+                                    <span class="badge bg-primary">SKU: {{ $producto['sku'] }}</span>
+                                </div>
+                                <p class="text-muted mb-0">Marca: {{ $producto['marca']['name'] }}</p>
                             </div>
-                            <p class="text-muted mb-0">Marca: {{ $producto['marca']['name']}}</p>
                         </div>
                     </div>
                 </div>
