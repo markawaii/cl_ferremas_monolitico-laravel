@@ -35,7 +35,7 @@
                         <td>${{ number_format($producto['price'], 0, ',', '.') }}</td>
                         <td>{{ $producto['stock'] }}</td>
                         <td>{{ $producto['sku'] }}</td>
-                        <td>{{ $producto['brand_id'] }}</td>
+                        <td>{{ $producto['marca']['name'] }}</td>
                         <td>
                             @if ($producto['active'])
                                 <span class="badge bg-success">Activo</span>
