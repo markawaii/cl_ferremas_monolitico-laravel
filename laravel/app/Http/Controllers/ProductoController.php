@@ -109,9 +109,9 @@ class ProductoController extends Controller
         return response()->json(['message' => 'Producto eliminado']);
     }
 
-    public function modificar_producto(Request $request, $id)
+    public function modificar_producto(Request $request)
     {
-        $producto = Producto::find($id);
+        $producto = Producto::find($request->input('id'));
 
         if (!$producto) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
