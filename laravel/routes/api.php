@@ -9,18 +9,27 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\TipoProductoController;
 
 
+// Prefijo para productos
+Route::prefix('producto')->group(function () {
+    Route::get('/obtener', [ProductoController::class, 'obtener_productos']);
+    Route::post('/crear', [ProductoController::class, 'crear_producto']);
+    Route::put('/modificar', [ProductoController::class, 'modificar_producto']);
+    Route::delete('/eliminar', [ProductoController::class, 'eliminar_producto']);
+});
 
-Route::get('/producto/obtener', [ProductoController::class, 'obtener_productos']);
-Route::post('/producto/crear', [ProductoController::class, 'crear_producto']);
-Route::put('/producto/{id}', [ProductoController::class, 'modificar_producto']);
-Route::delete('/producto/{id}', [ProductoController::class, 'eliminar_producto']);
+// Prefijo para tipo de producto
+Route::prefix('tipo-producto')->group(function () {
+    Route::get('/obtener', [TipoProductoController::class, 'obtener_tipoprod']);
+    Route::post('/crear', [TipoProductoController::class, 'crear_tipoprod']);
+    Route::put('/modificar', [TipoProductoController::class, 'modificar_tipoprod']);
+    Route::delete('/eliminar', [TipoProductoController::class, 'eliminar_tipoprod']);
+});
 
-Route::get('/tipoproducto/obtener', [TipoProductoController::class, 'obtener_tipoprod']);
-Route::post('/tipoproducto/crear', [TipoProductoController::class, 'crear_tipoprod']);
-Route::put('/tipoproducto/{id}', [TipoProductoController::class, 'modificar_tipoprod']);
-Route::delete('/tipoproducto/{id}', [TipoProductoController::class, 'eliminar_tipoprod']);
+// Prefijo para marcas
+Route::prefix('marca')->group(function () {
+    Route::get('/obtener', [MarcaController::class, 'obtener_marcas']);
+    Route::post('/crear', [MarcaController::class, 'crear_marca']);
+    Route::put('/{id}', [MarcaController::class, 'modificar_marca']);
+    Route::delete('/{id}', [MarcaController::class, 'eliminar_marca']);
+});
 
-Route::get('/marca/obtener', [MarcaController::class, 'obtener_marcas']);
-Route::post('/marca/crear', [MarcaController::class, 'crear_marca']);
-Route::put('/marca/{id}', [MarcaController::class, 'modificar_marca']);
-Route::delete('/marca/{id}', [MarcaController::class, 'eliminar_marca']);
