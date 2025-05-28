@@ -19,10 +19,14 @@ class ProductoController extends Controller
 
     public function index()
     {
+
         $response = $this->productoService->obtenerTodos();
         $productos =$response['data'];
+        // dd($productos);
+
         return view('pages.admin.producto.index', compact('productos'));
     }
+
     public function create()
     {
         $marcas = Marca::where('active', true)->get();
@@ -39,9 +43,9 @@ class ProductoController extends Controller
     //     dd('llegue al create');
     // }
 
-    // public function edit(){
-    //     dd('llegue al create');
-    // }
+    public function edit(string $id){
+        dd($id);
+    }
 
     // public function update(){
     //     dd('llegue al create');

@@ -19,10 +19,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/producto', [ProductoController::class, 'index'])->name('producto.index');
     Route::get('/producto/create', [ProductoController::class, 'create'])->name('producto.create');
     Route::post('/producto/store', [ProductoController::class, 'store'])->name('producto.store');
-    Route::get('/producto/show{id}', [ProductoController::class, 'show'])->name('producto.show');
-    Route::get('/producto/edit{id}', [ProductoController::class, 'edit'])->name('producto.edit');
-    Route::get('/producto/update{id}', [ProductoController::class, 'update'])->name('producto.update');
-    Route::get('/producto/destroy{id}', [ProductoController::class, 'destroy'])->name('producto.destroy');
+    Route::get('/producto/show/{id}', [ProductoController::class, 'show'])->name('producto.show');
+    Route::get('/producto/edit/{id}', [ProductoController::class, 'edit'])->name('producto.edit');
+    Route::put('/producto/update/{id}', [ProductoController::class, 'update'])->name('producto.update');
+    Route::delete('/producto/destroy/{id}', [ProductoController::class, 'destroy'])->name('producto.destroy');
 
 });
 
