@@ -29,7 +29,8 @@ class ProductoController extends Controller
 
     public function create()
     {
-        $marcas = Marca::where('active', true)->get();
+        // $marcas = Marca::where('active', true)->get();
+        $marcas = Marca::all();
         $tipos = TipoProducto::all();
         return view('pages.admin.producto.create', compact('marcas', 'tipos'));
     }
