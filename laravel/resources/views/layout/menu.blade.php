@@ -17,12 +17,12 @@
                             <span class="hide-menu">Administración</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('productos.index') }}" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('admin.producto.index') }}" aria-expanded="false">
                                 <i class="ti ti-atom"></i>
                                 <span class="hide-menu">Producto</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        {{-- <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('marcas.index') }}" aria-expanded="false">
                                 <i class="ti ti-atom"></i>
                                 <span class="hide-menu">Marca</span>
@@ -33,7 +33,7 @@
                                 <i class="ti ti-atom"></i>
                                 <span class="hide-menu">Tipo Producto</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <!-- ---------------------------------- -->
                         <!-- Dashboard -->
                         <!-- ---------------------------------- -->
