@@ -36,9 +36,28 @@ class ProductoController extends Controller
     }
 
 
-    // public function store(){
-    //     dd('llegue al create');
-    // }
+    public function store(Request $request){
+
+        $request->merge([
+            'active' => $request->has('active'),
+        ]);
+
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'price'=> 'required|numeric|min:0',
+            'description' => 'nullable|string',
+            'active' => 'nullable|boolean',
+            'stock' => 'required|integer|min:0',
+            'sku' => 'nullable|string|max:50',
+            'brand_id' => 'required|exists:marcas,id',
+            // 'type_id'=> 'required|exists:tipo_productos,id',
+        ]);
+
+        Producto::create($data);
+
+        return redirect()->route('admin.producto.index')->with('success', 'Producto creado correctamente.');
+        // dd('llegue al create');
+    }
 
     // public function show(){
     //     dd('llegue al create');
