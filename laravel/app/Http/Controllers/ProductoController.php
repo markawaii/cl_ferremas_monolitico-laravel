@@ -63,8 +63,12 @@ class ProductoController extends Controller
     //     dd('llegue al create');
     // }
 
-    public function edit(string $id){
-        dd($id);
+    public function edit($id)
+    {
+        $producto = Producto::findOrFail($id);
+        $marcas = Marca::all();
+        return view('pages.admin.producto.edit', compact('producto', 'marcas'));
+        // dd($id);
     }
 
     // public function update(){
