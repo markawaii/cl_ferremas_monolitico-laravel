@@ -16,7 +16,8 @@ class Producto extends Model
         'active',
         'stock',
         'sku',
-        'brand_id'
+        'brand_id',
+        // 'type_id',
     ];
 
     public function marca()

@@ -9,19 +9,24 @@ use App\Http\Controllers\TipoProductoController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/tipos', [TipoProductoController::class, 'index'])->name('tipos.index');
-Route::post('/tipos', [TipoProductoController::class, 'store'])->name('tipos.store');
-Route::put('/tipos/{id}', [TipoProductoController::class, 'update'])->name('tipos.update');
-Route::delete('/tipos/{id}', [TipoProductoController::class, 'destroy'])->name('tipos.destroy');
+//http://localhost/admin/
+//admin.producto.edit
+//admin.productos.store
+//localhost/admin/productos/destroy
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::get('/producto', [ProductoController::class, 'index'])->name('producto.index');
+    Route::get('/producto/create', [ProductoController::class, 'create'])->name('producto.create');
+    Route::post('/producto/store', [ProductoController::class, 'store'])->name('producto.store');
+    Route::get('/producto/show/{id}', [ProductoController::class, 'show'])->name('producto.show');
+    Route::get('/producto/edit/{id}', [ProductoController::class, 'edit'])->name('producto.edit');
+    Route::put('/producto/update/{id}', [ProductoController::class, 'update'])->name('producto.update');
+    Route::delete('/producto/destroy/{id}', [ProductoController::class, 'destroy'])->name('producto.destroy');
+
+});
 
 
-Route::get('/marcas', [MarcaController::class, 'index'])->name('marcas.index');
-Route::post('/marcas', [MarcaController::class, 'store'])->name('marcas.store');
-Route::put('/marcas/{id}', [MarcaController::class, 'update'])->name('marcas.update');
-Route::delete('/marcas/{id}', [MarcaController::class, 'destroy'])->name('marca.destroy');
+// Route::get('/tipos', [TipoProductoController::class, 'index'])->name('tipos.index');
 
-Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
-Route::post('/productos/crear', [ProductoController::class, 'store'])->name('productos.store');
-Route::post('/productos/actualizar/{id}', [ProductoController::class, 'update'])->name('productos.update');
-Route::delete('/producto/{id}', [ProductoController::class, 'destroy'])->name('productos.destroy');
-Route::get('/productos/obtener', [ProductoController::class, 'obtener_productos'])->name('productos.obtener');
+// Route::get('/marcas', [MarcaController::class, 'index'])->name('marcas.index');

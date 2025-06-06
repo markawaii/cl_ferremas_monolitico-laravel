@@ -7,7 +7,13 @@ use App\Models\Marca;
 
 class MarcaController extends Controller
 {
-    public function store(Request $request)
+
+    public function obtener_marcas()
+    {
+        $marcas = Marca::all();
+        return view('components.marcas.index', compact('marcas'));
+    }
+    public function crear_marca(Request $request)
     {
         $marca = Marca::create([
             'name' => $request->input('name'),
@@ -19,10 +25,27 @@ class MarcaController extends Controller
             'brand_id' => $marca->id,
         ];
 
-        return response()->json(['status' => 'success','message' => 'Marca creada correctamente', 'data' => $respuesta]);
+        return response()->json(['status' => 'success', 'message' => 'Marca creada correctamente', 'data' => $respuesta]);
     }
 
-    public function destroy($id)
+    public function modificar_marca(Request $request, $id)
+    {
+        $marca = Marca::find($id);
+
+        if (!$marca) {
+            return response()->json(['status' => 'error', 'message' => 'Marca no encontrada'], 404);
+        }
+
+        $marca->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'active' => $request->input('active') ? true : false,
+        ]);
+
+        return response()->json(['status' => 'success', 'message' => 'Marca actualizada correctamente', 'data' => $marca]);
+    }
+
+    public function eliminar_marca($id)
     {
         $marca = Marca::find($id);
 
@@ -32,30 +55,6 @@ class MarcaController extends Controller
 
         $marca->delete();
 
-        return response()->json(['status' => 'success','message' => 'Marca eliminada correctamente']);
+        return response()->json(['status' => 'success', 'message' => 'Marca eliminada correctamente']);
     }
-
-    public function update (Request $request, $id)
-    {
-        $marca = Marca::find($id);
-
-        if (!$marca) {
-            return response()->json(['status' => 'error', 'message' => 'Marca no encontrada'], 404);
-        }
-
-        $marca->update ([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'active' => $request->input('active') ? true : false,
-        ]);
-
-        return response()->json(['status' => 'success', 'message' => 'Marca actualizada correctamente', 'data' => $marca]);
-    }
-
-    public function index()
-{
-    $marcas = Marca::all();
-    return view('components.marcas.index', compact('marcas'));
-}
-
 }

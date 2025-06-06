@@ -1,20 +1,55 @@
 @extends('layout.app')
 
+@section('title', 'Lista de Productos')
+
 @section('content')
     <div class="container-fluid">
 
-        <div class="mt-4 pb-3 d-flex align-items-center">
-            <span class="btn btn-primary rounded-circle round-48 hstack justify-content-center">
-                <i class="ti ti-shopping-cart fs-6"></i>
-            </span>
-            <div class="ms-3">
-                <h5 class="mb-0 fw-bolder fs-4">Top Sales</h5>
-                <span class="text-muted fs-3">Johnathan Doe</span>
+
+        <div class="row">
+            <div class= "col-8">
+                <h2 class="mb-4">Productos Registrados</h2>
             </div>
-            <div class="ms-auto">
-                <span class="badge bg-secondary-subtle text-muted">+68%</span>
+            <div class="col-4">
+                <a href="{{ route('admin.producto.create') }}" class="btn btn-sm btn-info">Crear Producto</a>
             </div>
         </div>
-
+        <table class="table table-bordered table-hover text-center align-middle">
+            <thead class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>SKU</th>
+                    <th>Marca</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($productos as $producto)
+                    <tr>
+                        <td>{{ $producto['id'] }}</td>
+                        <td>{{ $producto['name'] }}</td>
+                        <td>${{ number_format($producto['price'], 0, ',', '.') }}</td>
+                        <td>{{ $producto['stock'] }}</td>
+                        <td>{{ $producto['sku'] }}</td>
+                        <td>{{ $producto['marca']['name'] }}</td>
+                        <td>
+                            @if ($producto['active'])
+                                <span class="badge bg-success">Activo</span>
+                            @else
+                                <span class="badge bg-secondary">Inactivo</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-info">Ver</a>
+                            <a href="{{ route('admin.producto.edit', $producto['id']) }}" class="btn btn-sm btn-info">Editar</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection

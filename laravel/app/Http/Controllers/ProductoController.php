@@ -6,30 +6,70 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Marca;
 use App\Models\TipoProducto;
+use App\Services\productoService;
 use GuzzleHttp\Promise\Create;
 
 class ProductoController extends Controller
 {
-    public function index()
+    public function __construct(productoService $productoService)
     {
-        return view('pages.producto.index');
+
+        $this->productoService = $productoService;
     }
 
-    // public function create(){
-    //     dd('llegue al create');
-    // }
+    public function index()
+    {
 
-    // public function store(){
-    //     dd('llegue al create');
-    // }
+        $response = $this->productoService->obtenerTodos();
+        $productos =$response['data'];
+        // dd($productos);
+
+        return view('pages.admin.producto.index', compact('productos'));
+    }
+
+    public function create()
+    {
+        // $marcas = Marca::where('active', true)->get();
+        $marcas = Marca::all();
+        $tipos = TipoProducto::all();
+        return view('pages.admin.producto.create', compact('marcas', 'tipos'));
+    }
+
+
+    public function store(Request $request){
+
+        $request->merge([
+            'active' => $request->has('active'),
+        ]);
+
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'price'=> 'required|numeric|min:0',
+            'description' => 'nullable|string',
+            'active' => 'nullable|boolean',
+            'stock' => 'required|integer|min:0',
+            'sku' => 'nullable|string|max:50',
+            'brand_id' => 'required|exists:marcas,id',
+            // 'type_id'=> 'required|exists:tipo_productos,id',
+        ]);
+
+        Producto::create($data);
+
+        return redirect()->route('admin.producto.index')->with('success', 'Producto creado correctamente.');
+        // dd('llegue al create');
+    }
 
     // public function show(){
     //     dd('llegue al create');
     // }
 
-    // public function edit(){
-    //     dd('llegue al create');
-    // }
+    public function edit($id)
+    {
+        $producto = Producto::findOrFail($id);
+        $marcas = Marca::all();
+        return view('pages.admin.producto.edit', compact('producto', 'marcas'));
+        // dd($id);
+    }
 
     // public function update(){
     //     dd('llegue al create');
@@ -51,7 +91,7 @@ class ProductoController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function crear_producto(Request $request)
     {
         // dd($request->all());
 
@@ -79,7 +119,7 @@ class ProductoController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Producto creado correctamente', 'data' => $respuesta]);
     }
 
-    public function destroy(Request $request)
+    public function eliminar_producto(Request $request)
     {
         $id = $request->input('id');
         $producto = Producto::find($id);
@@ -93,9 +133,9 @@ class ProductoController extends Controller
         return response()->json(['message' => 'Producto eliminado']);
     }
 
-    public function update(Request $request, $id)
+    public function modificar_producto(Request $request)
     {
-        $producto = Producto::find($id);
+        $producto = Producto::find($request->input('id'));
 
         if (!$producto) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
