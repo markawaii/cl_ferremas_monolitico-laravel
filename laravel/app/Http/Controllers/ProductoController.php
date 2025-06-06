@@ -6,23 +6,27 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Marca;
 use App\Models\TipoProducto;
-use App\Services\productoService;
+use App\Services\ferremaService;
 use GuzzleHttp\Promise\Create;
 
 class ProductoController extends Controller
 {
-    public function __construct(productoService $productoService)
-    {
+    protected $ferremaService;
 
-        $this->productoService = $productoService;
+    public function __construct(ferremaService $ferremaService)
+    {
+        $this->ferremaService = $ferremaService;
     }
 
     public function index()
     {
+        $response = $this->ferremaService->get('producto/obtener');
 
-        $response = $this->productoService->obtenerTodos();
-        $productos =$response['data'];
-        // dd($productos);
+        if (!$response || !isset($response['data'])) {
+            return back()->withErrors('Error al obtener productos.');
+        }
+
+        $productos = $response['data'];
 
         return view('pages.admin.producto.index', compact('productos'));
     }
