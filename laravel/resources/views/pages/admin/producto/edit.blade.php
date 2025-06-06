@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container mt-4">
+<div class="container-fluid">
     <h2>Editar Producto</h2>
 
     @if ($errors->any())
@@ -17,7 +17,7 @@
         </div>
     @endif
 
-    <form action="{{ rotue('admin.producto.update', $producto->id) }}" method="POST">
+    <form action="{{ route('admin.producto.update', $producto->id) }}" method="POST">
         @csrf
         @method('PUT')
 
