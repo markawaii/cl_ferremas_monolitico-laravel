@@ -4,8 +4,6 @@
 
 @section('content')
     <div class="container-fluid">
-
-
         <div class="row">
             <div class= "col-8">
                 <h2 class="mb-4">Productos Registrados</h2>

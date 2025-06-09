@@ -1,17 +1,13 @@
-    {{-- <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
-    {{-- <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script> --}}
-    {{-- <script src="./assets/js/sidebarmenu.js"></script>
-    <script src="./assets/js/app.min.js"></script>
-    <script src="./assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-    <script src="./assets/libs/simplebar/dist/simplebar.js"></script>
-    <script src="./assets/js/dashboard.js"></script> --}}
-    <!-- solar icons -->
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
-    <script src="{{ asset('assets/js/app.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/simplebar/dist/simplebar.js') }}"></script>
-    <script src="{{ asset('assets/js/dashboard.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
