@@ -3,17 +3,23 @@
 @section('title', 'Lista de Productos')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class= "col-8">
-                <h2 class="mb-4">Productos Registrados</h2>
-            </div>
-            <div class="col-4">
-                <a href="{{ route('admin.producto.create') }}" class="btn btn-sm btn-info">Crear Producto</a>
-            </div>
+<div class="container py-4">
+    {{-- Encabezado --}}
+    <div class="row mb-3 align-items-center">
+        <div class="col-md-8">
+            <h2 class="fw-bold text-dark">Productos Registrados</h2>
         </div>
-        <table class="table table-bordered table-hover text-center align-middle">
-            <thead class="table">
+        <div class="col-md-4 text-end">
+            <a href="{{ route('admin.producto.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i> Crear Producto
+            </a>
+        </div>
+    </div>
+
+    {{-- Tabla de productos --}}
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover align-middle text-center mb-0">
+            <thead class="table-light">
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
@@ -26,28 +32,39 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($productos as $producto)
+                @forelse ($productos as $producto)
                     <tr>
                         <td>{{ $producto['id'] }}</td>
-                        <td>{{ $producto['name'] }}</td>
+                        <td class="text-start">{{ $producto['name'] }}</td>
                         <td>${{ number_format($producto['price'], 0, ',', '.') }}</td>
                         <td>{{ $producto['stock'] }}</td>
                         <td>{{ $producto['sku'] }}</td>
                         <td>{{ $producto['marca']['name'] }}</td>
                         <td>
                             @if ($producto['active'])
-                                <span class="badge bg-success">Activo</span>
+                                <span class="badge bg-success px-3 py-2">Activo</span>
                             @else
-                                <span class="badge bg-secondary">Inactivo</span>
+                                <span class="badge bg-danger px-3 py-2">Inactivo</span>
                             @endif
                         </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-info">Ver</a>
-                            <a href="{{ route('admin.producto.edit', $producto['id']) }}" class="btn btn-sm btn-info">Editar</a>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ route('admin.producto.edit', $producto['id']) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </div>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="8" class="text-muted py-4">No hay productos registrados.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
+</div>
 @endsection
