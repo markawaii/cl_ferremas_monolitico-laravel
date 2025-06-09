@@ -62,8 +62,8 @@
                     <select name="brand_id" id="brand_id" class="form-select" required>
                         <option value="">-- Seleccione una Marca --</option>
                         @foreach ($marcas as $marca)
-                            <option value="{{ $marca->id }}"{{ old('brand_id') == $marca->id ? 'selected' : '' }}>
-                                {{ $marca->name }}
+                            <option value="{{ $marca['id'] }}"{{ old('brand_id') == $marca['id'] ? 'selected' : '' }}>
+                                {{ $marca['name'] }}
                             </option>
                         @endforeach
                     </select>

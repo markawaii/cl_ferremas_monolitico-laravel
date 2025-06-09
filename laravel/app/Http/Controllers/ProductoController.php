@@ -33,34 +33,20 @@ class ProductoController extends Controller
 
     public function create()
     {
-        // $marcas = Marca::where('active', true)->get();
-        $marcas = Marca::all();
-        $tipos = TipoProducto::all();
+        $consultarMarcas = $this->ferremaService->get('marca/obtener');
+        $marcas = $consultarMarcas['data'];
+        $consultarTipos = $this->ferremaService->get('tipo-producto/obtener');
+        $tipos = $consultarTipos['data'];
         return view('pages.admin.producto.create', compact('marcas', 'tipos'));
     }
 
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-        $request->merge([
-            'active' => $request->has('active'),
-        ]);
-
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'price'=> 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'active' => 'nullable|boolean',
-            'stock' => 'required|integer|min:0',
-            'sku' => 'nullable|string|max:50',
-            'brand_id' => 'required|exists:marcas,id',
-            // 'type_id'=> 'required|exists:tipo_productos,id',
-        ]);
-
-        Producto::create($data);
-
+        $data = $request->all();
+        $response = $this->ferremaService->post('producto/crear', $data);
         return redirect()->route('admin.producto.index')->with('success', 'Producto creado correctamente.');
-        // dd('llegue al create');
     }
 
     // public function show(){
@@ -69,10 +55,13 @@ class ProductoController extends Controller
 
     public function edit($id)
     {
-        $producto = Producto::findOrFail($id);
-        $marcas = Marca::all();
+        $data = ['id' => $id];
+
+        $response = $this->ferremaService->get('producto/obtener', $data);
+        dd($response);
+        $producto = $response['producto'];
+
         return view('pages.admin.producto.edit', compact('producto', 'marcas'));
-        // dd($id);
     }
 
     // public function update(){
@@ -84,8 +73,14 @@ class ProductoController extends Controller
 
     // }
 
-    public function obtener_productos()
+    public function obtener_productos(Request $request)
     {
+        //1. Verificar si viene un json
+
+        //2. Si viene un json, verificar si tiene un id
+
+        //3. Si tiene un id, que solo retorne el producto al cual pertenece ese id.
+
         $producto = Producto::with('marca')->get();
 
         return response()->json([

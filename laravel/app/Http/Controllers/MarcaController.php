@@ -11,7 +11,11 @@ class MarcaController extends Controller
     public function obtener_marcas()
     {
         $marcas = Marca::all();
-        return view('components.marcas.index', compact('marcas'));
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Lista de marcas obtenida correctamente',
+            'data' => $marcas
+        ]);
     }
     public function crear_marca(Request $request)
     {
