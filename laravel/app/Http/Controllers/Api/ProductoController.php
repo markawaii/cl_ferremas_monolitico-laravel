@@ -11,13 +11,12 @@ class ProductoController extends Controller
 {
     public function obtener_productos(Request $request)
     {
-        //1. Verificar si viene un json
-
-        //2. Si viene un json, verificar si tiene un id
-
-        //3. Si tiene un id, que solo retorne el producto al cual pertenece ese id.
-
-        $producto = Producto::with('marca')->get();
+        if ($request->has('id')) {
+            $id = $request->input('id');
+            $producto = Producto::with('marca')->find($id);
+        } else {
+            $producto = Producto::with('marca')->get();
+        }
 
         return response()->json([
             'status' => 'success',

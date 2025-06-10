@@ -47,12 +47,13 @@ class ProductoController extends Controller
 
     public function edit($id)
     {
-        $data = ['id' => $id];
+        $response = $this->ferremaService->get('producto/obtener', ['id' => $id]);
+        // dd($response);
+        $producto = $response['data'];
 
-        $response = $this->ferremaService->get('producto/obtener', $data);
-        dd($response);
-        $producto = $response['producto'];
-
+        $responseMarcas = $this->ferremaService->get('marca/obtener');
+        $marcas= $responseMarcas['data'];
+        // dd(['producto' => $producto, 'marcas'=>$marcas]);
         return view('pages.admin.producto.edit', compact('producto', 'marcas'));
     }
 
