@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ferremaService;
+use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
@@ -52,14 +53,32 @@ class ProductoController extends Controller
         $producto = $response['data'];
 
         $responseMarcas = $this->ferremaService->get('marca/obtener');
-        $marcas= $responseMarcas['data'];
+        $marcas = $responseMarcas['data'];
         // dd(['producto' => $producto, 'marcas'=>$marcas]);
         return view('pages.admin.producto.edit', compact('producto', 'marcas'));
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
-        dd('llegue al create');
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'nullable|string',
+            'stock' => 'required|integer',
+            'sku' => 'nullable|string|max:100',
+            'brand_id' => 'required|integer',
+        ]);
+
+        $data['active'] = $request->has('active') ? 1 : 0;
+        $data['id'] = $id;
+
+        $response = $this->ferremaService->put('producto/modificar', $data);
+
+        if ($response && isset($response['id'])) {
+            return redirect()->route('admin.producto.index')->with('success', 'Producto actualizado correctamente');
+        } else {
+            return back()->withErrors('Ocurrió un error al actualizar el producto')->withInput();
+        }
     }
 
     public function delete()

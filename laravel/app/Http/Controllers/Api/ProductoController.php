@@ -83,7 +83,7 @@ class ProductoController extends Controller
             'sku' => $request->input('sku'),
             'active' => $request->input('active') ? true : false,
             'brand_id' => $request->input('brand_id'),
-            'type_id' => $request->input('type_id'),
+            // 'type_id' => $request->input('type_id'),
         ]);
 
         return response()->json($producto);

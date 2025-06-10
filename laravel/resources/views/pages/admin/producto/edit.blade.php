@@ -7,6 +7,12 @@
     <div class="container-fluid">
         <h2>Editar Producto</h2>
 
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul class="mb-0">
@@ -63,9 +69,9 @@
             <!-- Activo Producto checkbox -->
 
             <div class="mb-3 form-check">
-                <input type="checkbox" name="active" id="active class="form-check-input"
-                    {{ old('active', $producto['active']) ? 'checked' : '' }}">
-                <label for='active' class="form-check-label">Activo</label>
+                <input type="checkbox" name="active" id="active" class="form-check-input"
+                    {{ old('active', $producto['active']) ? 'checked' : '' }}>
+                <label for="active" class="form-check-label">Activo</label>
 
             </div>
 
@@ -82,6 +88,11 @@
                         </option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="mb-3 d-flex justify content-between">
+                <button type="submit" class="btn btn-primary">Editar Producto</button>
+                <a href="{{ route('admin.producto.index') }}" class="btn btn-secondary"> Cancelar</a>
             </div>
         </form>
     </div>
