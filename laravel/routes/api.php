@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\MarcaController;
-use App\Http\Controllers\TipoProductoController;
+use App\Http\Controllers\Api\MarcaController;
+use App\Http\Controllers\Api\ProductoController;
+use App\Http\Controllers\Api\TipoProductoController;
 
 
 // Prefijo para productos
