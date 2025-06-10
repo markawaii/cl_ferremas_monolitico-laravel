@@ -75,11 +75,29 @@ class ProductoController extends Controller
 
     public function obtener_productos(Request $request)
     {
-        //1. Verificar si viene un json
+        //1. Hacer la solicitud dependiendo del ID, y si viene, pasa
 
-        //2. Si viene un json, verificar si tiene un id
+        $id = $request->input(('id'));
 
-        //3. Si tiene un id, que solo retorne el producto al cual pertenece ese id.
+        //2. Si se obtiene el ID, es arrojado al dd y de lo contrario genera un error.
+
+        if ($id) {
+            $producto = Producto::with('marca')->find($id);
+
+            return $producto
+            ? response()->json([
+                'status'=> 'success',
+                'message' => 'Producto obtenido correctamente.',
+                'data' => $producto
+            ])
+            : response()->json([
+                'status' => 'error',
+                'message' => 'Producto no encontrado',
+                'data' => null
+            ], 404);
+        }
+
+        //3. Si no hay ID, devuelve todos.
 
         $producto = Producto::with('marca')->get();
 
