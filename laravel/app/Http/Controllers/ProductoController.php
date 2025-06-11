@@ -36,9 +36,26 @@ class ProductoController extends Controller
         return view('pages.admin.producto.create', compact('marcas', 'tipos'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        dd('llegue al create');
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'nullable|string',
+            'stock' => 'required|integer',
+            'sku' => 'nullable|string|max:100',
+            'brand_id' => 'required|integer',
+        ]);
+
+        $data['active'] = $request->has('active') ? 1 : 0;
+
+        $response = $this->ferremaService->post('producto/crear', $data);
+
+        if (!$response) {
+            return back()->withErrors('Ocurrió un error al crear el producto');
+        }
+
+        return redirect()->route('admin.producto.index')->with('success', 'Producto creado correctamente');
     }
 
     public function show()
@@ -81,8 +98,14 @@ class ProductoController extends Controller
         }
     }
 
-    public function delete()
+    public function destroy($id)
     {
-        dd('llegue al create');
+        $response = $this->ferremaService->delete('producto/eliminar', ['id' => $id]);
+
+        if (!$response) {
+            return back()->withErrors('No se pudo eliminar el producto.');
+        }
+
+        return redirect()->route('admin.producto.index')->with('sucess', 'Producto eliminado correctamente.');
     }
 }
