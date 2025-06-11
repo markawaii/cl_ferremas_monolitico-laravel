@@ -58,9 +58,18 @@ class ProductoController extends Controller
         return redirect()->route('admin.producto.index')->with('success', 'Producto creado correctamente');
     }
 
-    public function show()
+    public function show($id)
     {
-        dd('llegue al create');
+        // dd('llegue al create');
+        $response = $this->ferremaService->get('producto/obtener', ['id' => $id]);
+
+        if (!$response || !isset($response['data'])) {
+            return back()->withErrors('No se pudo obtener el producto.');
+        }
+
+        $producto = $response['data'];
+
+        return view('pages.admin.producto.show', compact('producto'));
     }
 
     public function edit($id)

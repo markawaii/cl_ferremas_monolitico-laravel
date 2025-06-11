@@ -49,7 +49,7 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                                    <a href="{{ route('admin.producto.show', $producto['id']) }}" class="btn btn-sm btn-outline-secondary">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <a href="{{ route('admin.producto.edit', $producto['id']) }}"
