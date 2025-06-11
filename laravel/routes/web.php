@@ -16,6 +16,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
+    //PRODUCTO
+
     Route::get('/producto', [ProductoController::class, 'index'])->name('producto.index');
     Route::get('/producto/create', [ProductoController::class, 'create'])->name('producto.create');
     Route::post('/producto/store', [ProductoController::class, 'store'])->name('producto.store');
@@ -24,9 +26,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/producto/update/{id}', [ProductoController::class, 'update'])->name('producto.update');
     Route::delete('/producto/destroy/{id}', [ProductoController::class, 'destroy'])->name('producto.destroy');
 
+    //MARCA
+
+    Route::get('/marca', [MarcaController::class, 'index'])->name('marca.index');
+    Route::get('/marca/create', [ProductoController::class, 'create'])->name('marca.create');
+    Route::post('/marca/store', [ProductoController::class, 'store'])->name('marca.store');
+    // Route::get('/marca/show/{id}', [ProductoController::class, 'show'])->name('producto.show');
+    Route::get('/marca/edit/{id}', [ProductoController::class, 'edit'])->name('marca.edit');
+    Route::put('/marca/update/{id}', [ProductoController::class, 'update'])->name('marca.update');
+    Route::delete('/marca/destroy/{id}', [ProductoController::class, 'destroy'])->name('marca.destroy');
+
+    //TIPO PRODUCTO / CATEGORÍA
+
+    // Route::get('/tipos', [TipoProductoController::class, 'index'])->name('tipos.index');
 });
-
-
-// Route::get('/tipos', [TipoProductoController::class, 'index'])->name('tipos.index');
-
-// Route::get('/marcas', [MarcaController::class, 'index'])->name('marcas.index');

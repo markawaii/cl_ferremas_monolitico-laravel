@@ -12,7 +12,7 @@
             <div class="navbar-nav mx-auto py-0">
                 <a href="{{ route('home.index') }}" class="nav-item nav-link active">Inicio</a>
                 <a href="{{ route('admin.producto.index') }}" class="nav-item nav-link">Producto</a>
-                <a href="#overview" class="nav-item nav-link">Marcas</a>
+                <a href="{{ route('admin.marca.index') }}" class="nav-item nav-link">Marcas</a>
                 <a href="#features" class="nav-item nav-link">Tipo de productos</a>
                 <a href="#pricing" class="nav-item nav-link">Usuarios</a>
                 {{-- <a href="#testimonial" class="nav-item nav-link">Testimonial</a> --}}
