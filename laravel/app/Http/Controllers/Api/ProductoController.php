@@ -11,19 +11,31 @@ class ProductoController extends Controller
 {
     public function obtener_productos(Request $request)
     {
-        if ($request->has('id')) {
-            $id = $request->input('id');
-            $producto = Producto::with('marca')->find($id);
+        if ($request->filled('id')) {
+            $producto = Producto::with('marca')->find($request->input('id'));
+
+            if (!$producto) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Producto no encontrado',
+                    'data' => null
+                ], 404);
+            }
+
+            $data = $producto;
+            $message = 'Producto obtenido correctamente';
         } else {
-            $producto = Producto::with('marca')->get();
+            $data = Producto::with('marca')->get();
+            $message = 'Lista de productos obtenida correctamente';
         }
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Lista de productos obtenida correctamente',
-            'data' => $producto
+            'message' => $message,
+            'data' => $data
         ]);
     }
+
 
     public function crear_producto(Request $request)
     {
