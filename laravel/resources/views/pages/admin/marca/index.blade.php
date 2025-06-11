@@ -44,12 +44,14 @@
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
                                     {{-- Botón editar --}}
-                                    <a href="{{ route('admin.marca.edit', $marca['id']) }}" class="btn btn-sm btn-outline-primary">
+                                    <a href="{{ route('admin.marca.edit', $marca['id']) }}"
+                                        class="btn btn-sm btn-outline-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
 
                                     {{-- Botón eliminar --}}
-                                    <form action="{{ route('admin.marca.destroy', $marca['id']) }}" method="POST" style="display:inline">
+                                    <form action="{{ route('admin.marca.destroy', $marca['id']) }}" method="POST"
+                                        style="display:inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-link text-danger btn-outline-danger"

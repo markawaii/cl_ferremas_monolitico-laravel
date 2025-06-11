@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\ferremaService;
 use Illuminate\Http\Request;
-use App\Models\Marca;
 
 class MarcaController extends Controller
 {
@@ -38,7 +37,7 @@ class MarcaController extends Controller
         dd('llegué al create');
     }
 
-    public function edit()
+    public function edit($id)
     {
         dd('llegué al create');
     }
@@ -48,12 +47,12 @@ class MarcaController extends Controller
         dd('llegué al create');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
         dd('llegué al create');
     }
 
-    public function show()
+    public function show($id)
     {
         dd('llegué al create');
     }
