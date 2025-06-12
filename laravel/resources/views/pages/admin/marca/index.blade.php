@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container py-4">
-        {{-- Encabezado --}}
         <div class="row mb-3 align-items-center">
             <div class="col-md-8">
                 <h2 class="fw-bold text-dark">Marcas Registradas</h2>
@@ -15,8 +14,6 @@
                 </a>
             </div>
         </div>
-
-        {{-- Tabla de marcas --}}
         <div class="table-responsive shadow-sm rounded">
             <table class="table table-hover align-middle text-center mb-0">
                 <thead class="table-light">
@@ -43,13 +40,14 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    {{-- Botón editar --}}
+                                    <a href="{{ route('admin.marca.show', $marca['id']) }}"
+                                        class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
                                     <a href="{{ route('admin.marca.edit', $marca['id']) }}"
                                         class="btn btn-sm btn-outline-primary">
                                         <i class="fas fa-edit"></i>
                                     </a>
-
-                                    {{-- Botón eliminar --}}
                                     <form action="{{ route('admin.marca.destroy', $marca['id']) }}" method="POST"
                                         style="display:inline">
                                         @csrf

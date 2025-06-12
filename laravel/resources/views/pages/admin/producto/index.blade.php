@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container py-4">
-        {{-- Encabezado --}}
         <div class="row mb-3 align-items-center">
             <div class="col-md-8">
                 <h2 class="fw-bold text-dark">Productos Registrados</h2>
@@ -15,8 +14,6 @@
                 </a>
             </div>
         </div>
-
-        {{-- Tabla de productos --}}
         <div class="table-responsive shadow-sm rounded">
             <table class="table table-hover align-middle text-center mb-0">
                 <thead class="table-light">

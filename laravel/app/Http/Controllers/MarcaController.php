@@ -97,8 +97,16 @@ class MarcaController extends Controller
         return redirect()->route('admin.marca.index')->with('success', 'Marca eliminada correctamente.');
     }
 
-    // public function show($id)
-    // {
-    //     dd('llegué al create');
-    // }
+    public function show($id)
+    {
+        $response = $this->ferremaService->get('marca/obtener', ['id' => $id]);
+
+        if (!$response || !isset($response['data'])) {
+            return back()->withErrors('No se pudo obtener la información de la marca.');
+        }
+
+        $marca = $response['data'];
+
+        return view('pages.admin.marca.show', compact('marca'));
+    }
 }
