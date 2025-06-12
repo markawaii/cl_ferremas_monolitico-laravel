@@ -8,9 +8,28 @@ use App\Http\Controllers\Controller;
 
 class MarcaController extends Controller
 {
-    public function obtener_marcas()
+    public function obtener_marcas(Request $request)
     {
+        if ($request->has('id')) {
+            $id = $request->input('id');
+            $marca = Marca::find($id);
+
+            if (!$marca) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Marca no encontrada',
+                ], 404);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Marca obtenida correctamente',
+                'data' => $marca,
+            ]);
+        }
+
         $marcas = Marca::all();
+
         return response()->json([
             'status' => 'success',
             'message' => 'Lista de marcas obtenida correctamente',
@@ -32,25 +51,27 @@ class MarcaController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Marca creada correctamente', 'data' => $respuesta]);
     }
 
-    public function modificar_marca(Request $request, $id)
+    public function modificar_marca(Request $request)
     {
+        $id = $request->input('id');
         $marca = Marca::find($id);
 
         if (!$marca) {
-            return response()->json(['status' => 'error', 'message' => 'Marca no encontrada'], 404);
+            return response()->json(['status' => 'error', 'message' => 'Marca no encontrada']);
         }
 
         $marca->update([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'active' => $request->input('active') ? true : false,
+            'active' => $request->has('active') ? 1 : 0,
         ]);
 
         return response()->json(['status' => 'success', 'message' => 'Marca actualizada correctamente', 'data' => $marca]);
     }
 
-    public function eliminar_marca($id)
+    public function eliminar_marca(Request $request)
     {
+        $id = $request->input('id');
         $marca = Marca::find($id);
 
         if (!$marca) {

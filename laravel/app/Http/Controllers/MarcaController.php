@@ -49,26 +49,56 @@ class MarcaController extends Controller
 
         return redirect()->route('admin.marca.index')->with('sucess', 'Marca creada correctamente');
 
-        // dd('llegué al create');
+
     }
 
     public function edit($id)
     {
-        dd('llegué al create');
+        $response = $this->ferremaService->get('marca/obtener', ['id' => $id]);
+
+        if (!$response || !isset($response['data'])) {
+            return back()->withErrors('No se pudo obtener la marca');
+        }
+
+        $marca = $response['data'];
+
+        return view('pages.admin.marca.edit', compact('marca'));
+
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
-        dd('llegué al create');
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+
+        $data['active'] = $request->has('active') ? 1 : 0;
+
+        $data['id'] = $id;
+
+        $response = $this->ferremaService->put('marca/modificar', $data);
+
+        if (!$response) {
+            return back()->withErrors('Ocurrió un error al actualizar la marca.');
+        }
+
+        return redirect()->route('admin.marca.index')->with('success', 'Marca actualizada correctamente.');
     }
 
     public function destroy($id)
     {
-        dd('llegué al create');
+        $response = $this->ferremaService->delete('marca/eliminar', ['id' => $id]);
+
+        if (!$response) {
+            return back()->withErrors('No se pudo eliminar la marca.');
+        }
+
+        return redirect()->route('admin.marca.index')->with('success', 'Marca eliminada correctamente.');
     }
 
-    public function show($id)
-    {
-        dd('llegué al create');
-    }
+    // public function show($id)
+    // {
+    //     dd('llegué al create');
+    // }
 }
