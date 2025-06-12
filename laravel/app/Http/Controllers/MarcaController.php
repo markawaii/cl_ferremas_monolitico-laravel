@@ -29,12 +29,27 @@ class MarcaController extends Controller
 
     public function create()
     {
-        dd('llegué al create');
+        return view('pages.admin.marca.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        dd('llegué al create');
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $data['active'] = $request->has('active') ? 1 : 0;
+
+        $response = $this->ferremaService->post('marca/crear', $data);
+
+        if (!$response) {
+            return back()->withErrors('Ocurrió un error al crear la marca')->withInput();
+        }
+
+        return redirect()->route('admin.marca.index')->with('sucess', 'Marca creada correctamente');
+
+        // dd('llegué al create');
     }
 
     public function edit($id)
