@@ -29,4 +29,9 @@ class Producto extends Model
     {
         return $this->belongsTo(TipoProducto::class, 'type_id');
     }
+
+    public function preciosHistoricos()
+    {
+        return $this->hasMany(PrecioHistorico::class, 'product_id');
+    }
 }

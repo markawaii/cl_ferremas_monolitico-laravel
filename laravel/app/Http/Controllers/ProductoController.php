@@ -52,25 +52,31 @@ class ProductoController extends Controller
 
         $response = $this->ferremaService->post('producto/crear', $data);
 
-        if (!$response) {
+        if (!$response || !isset($response['data']['producto_id'])) {
             return back()->withErrors('Ocurrió un error al crear el producto');
         }
 
+        // Registrar historial de precio
+        $this->registrarHistorialPrecio($response['data']['producto_id'], $data['price'], 'Producto creado');
+
         return redirect()->route('admin.producto.index')->with('success', 'Producto creado correctamente');
     }
+
 
     public function show($id)
     {
         // dd('llegue al create');
         $response = $this->ferremaService->get('producto/obtener', ['id' => $id]);
+        $historialResponse = $this->ferremaService->get("precio-historico/listar/{$id}");
 
         if (!$response || !isset($response['data'])) {
             return back()->withErrors('No se pudo obtener el producto.');
         }
 
         $producto = $response['data'];
+        $historial = $historialResponse['data'] ?? [];
 
-        return view('pages.admin.producto.show', compact('producto'));
+        return view('pages.admin.producto.show', compact('producto', 'historial'));
     }
 
     public function edit($id)
@@ -107,6 +113,7 @@ class ProductoController extends Controller
         $response = $this->ferremaService->put('producto/modificar', $data);
 
         if ($response && isset($response['id'])) {
+            $this->registrarHistorialPrecio($id, $data['price'], 'Producto actualizado');
             return redirect()->route('admin.producto.index')->with('success', 'Producto actualizado correctamente');
         } else {
             return back()->withErrors('Ocurrió un error al actualizar el producto')->withInput();
@@ -122,5 +129,16 @@ class ProductoController extends Controller
         }
 
         return redirect()->route('admin.producto.index')->with('sucess', 'Producto eliminado correctamente.');
+    }
+
+    private function registrarHistorialPrecio($productId, $price, $reason = null)
+    {
+        $payload = [
+            'product_id' => $productId,
+            'price' => $price,
+            'reason' => $reason,
+        ];
+
+        $this->ferremaService->post('precio-historico/crear', $payload);
     }
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('precio_historicos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->string('price');
-            $table->string('reason');
+            $table->foreignId('product_id')->constrained('productos')->onDelete('cascade')->comment('Relación con productos');
+            $table->decimal('price', 10, 2)->comment('Precio en el momento del cambio');
+            $table->string('reason')->nullable()->comment('Razón del cambio del precio');
             $table->timestamps();
         });
     }

@@ -3,9 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MarcaController;
+use App\Http\Controllers\Api\PrecioHistoricoController;
 use App\Http\Controllers\Api\ProductoController;
 use App\Http\Controllers\Api\TipoProductoController;
-
+use App\Models\PrecioHistorico;
 
 // Prefijo para productos
 Route::prefix('producto')->group(function () {
@@ -29,5 +30,12 @@ Route::prefix('marca')->group(function () {
     Route::post('/crear', [MarcaController::class, 'crear_marca']);
     Route::put('/modificar', [MarcaController::class, 'modificar_marca']);
     Route::delete('/eliminar', [MarcaController::class, 'eliminar_marca']);
+});
+
+// Prefijo para Precio Historico
+
+Route::prefix('precio-historico')->group(function () {
+    Route::get('listar/{id}', [PrecioHistoricoController::class, 'listar_precio']);
+    Route::post('/crear', [PrecioHistoricoController::class, 'crear_historico_precio']);
 });
 
