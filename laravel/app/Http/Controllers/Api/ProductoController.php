@@ -12,7 +12,7 @@ class ProductoController extends Controller
     public function obtener_productos(Request $request)
     {
         if ($request->filled('id')) {
-            $producto = Producto::with('marca')->find($request->input('id'));
+            $producto = Producto::with('marca', 'tipo')->find($request->input('id'));
 
             if (!$producto) {
                 return response()->json([
@@ -25,7 +25,7 @@ class ProductoController extends Controller
             $data = $producto;
             $message = 'Producto obtenido correctamente';
         } else {
-            $data = Producto::with('marca')->get();
+            $data = Producto::with('marca', 'tipo')->get();
             $message = 'Lista de productos obtenida correctamente';
         }
 
@@ -95,7 +95,7 @@ class ProductoController extends Controller
             'sku' => $request->input('sku'),
             'active' => $request->input('active') ? true : false,
             'brand_id' => $request->input('brand_id'),
-            // 'type_id' => $request->input('type_id'),
+            'type_id' => $request->input('type_id'),
         ]);
 
         return response()->json($producto);

@@ -45,6 +45,7 @@ class ProductoController extends Controller
             'stock' => 'required|integer',
             'sku' => 'nullable|string|max:100',
             'brand_id' => 'required|integer',
+            'type_id' => 'required|integer',
         ]);
 
         $data['active'] = $request->has('active') ? 1 : 0;
@@ -80,8 +81,12 @@ class ProductoController extends Controller
 
         $responseMarcas = $this->ferremaService->get('marca/obtener');
         $marcas = $responseMarcas['data'];
-        // dd(['producto' => $producto, 'marcas'=>$marcas]);
-        return view('pages.admin.producto.edit', compact('producto', 'marcas'));
+
+        $responseTipos = $this->ferremaService->get('tipo-producto/obtener');
+        $tipos = $responseTipos['data'];
+
+        // dd($producto);
+        return view('pages.admin.producto.edit', compact('producto', 'marcas', 'tipos'));
     }
 
     public function update(Request $request, $id)
@@ -93,6 +98,7 @@ class ProductoController extends Controller
             'stock' => 'required|integer',
             'sku' => 'nullable|string|max:100',
             'brand_id' => 'required|integer',
+            'type_id' => 'required|integer',
         ]);
 
         $data['active'] = $request->has('active') ? 1 : 0;

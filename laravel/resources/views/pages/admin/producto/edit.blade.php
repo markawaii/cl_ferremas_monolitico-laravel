@@ -90,6 +90,19 @@
                 </select>
             </div>
 
+            <div class="mb-3">
+                <label for="type_id" class="form-label">Tipo de Producto</label>
+                <select name="type_id" id="type_id" class="form-select" required>
+                    <option value="">-- Selecciona un Tipo de Producto --</option>
+                    @foreach ($tipos as $tipo)
+                        <option value="{{ $tipo['id'] }}"
+                            {{ old('type_id', $producto['type_id']) == $tipo['id'] ? 'selected' : '' }}>
+                            {{ $tipo['nombre'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="mb-3 d-flex justify content-between">
                 <button type="submit" class="btn btn-primary">Editar Producto</button>
                 <a href="{{ route('admin.producto.index') }}" class="btn btn-secondary"> Cancelar</a>

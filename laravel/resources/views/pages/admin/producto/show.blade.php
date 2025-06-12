@@ -13,7 +13,8 @@
         <li class="list-group-item"><strong>Descripción:</strong> {{ $producto['description'] }}</li>
         <li class="list-group-item"><strong>Stock:</strong> {{ $producto['stock'] }}</li>
         <li class="list-group-item"><strong>SKU:</strong> {{ $producto['sku'] }}</li>
-        <li class="list-group-item"><strong>Marca:</strong> {{ $producto['marca']['name'] }}</li>
+        <li class="list-group-item"><strong>Marca:</strong> {{ $producto['marca']['name'] ?? 'Sin marca asignada'}}</li>
+        <li class="list-group-item"><strong>Tipo de Producto</strong>{{ $producto['tipo']['nombre'] ?? 'Sin tipo asignado'}}</li>
         <li class="list-group-item"><strong>Activo:</strong> {{ $producto['active'] ? 'Sí' : 'No' }}</li>
     </ul>
 

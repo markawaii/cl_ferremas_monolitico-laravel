@@ -69,17 +69,17 @@
                     </select>
                 </div>
 
-                {{-- <div class="mb-3">
-                    <label for="type_id" class="form_label">Tipo de Producto</label>
+                <div class="mb-3">
+                    <label for="type_id" class="form-label">Tipo de Producto</label>
                     <select name="type_id" id="type_id" class="form-select" required>
                         <option value="">-- Seleccione un Tipo de Producto --</option>
                         @foreach ($tipos as $tipo)
-                            <option value="{{ $tipo->id }}"{{ old('type_id') == $tipo->id ? 'selected' : '' }}>
-                                {{ $tipo->nombre }}
+                            <option value="{{ $tipo['id'] }}"{{ old('type_id') == $tipo['id'] ? 'selected' : '' }}>
+                                {{ $tipo['nombre'] }}
                             </option>
                         @endforeach
                     </select>
-                </div> --}}
+                </div>
 
                 <button type="submit" class="btn btn-primary">Guardar Producto</button>
             </form>

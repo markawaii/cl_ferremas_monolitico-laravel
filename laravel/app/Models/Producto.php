@@ -17,11 +17,16 @@ class Producto extends Model
         'stock',
         'sku',
         'brand_id',
-        // 'type_id',
+        'type_id',
     ];
 
     public function marca()
     {
         return $this->belongsTo(Marca::class, 'brand_id');
+    }
+
+    public function tipo()
+    {
+        return $this->belongsTo(TipoProducto::class, 'type_id');
     }
 }
