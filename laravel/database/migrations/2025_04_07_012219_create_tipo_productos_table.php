@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tipo_productos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->boolean('status')->default(false);
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

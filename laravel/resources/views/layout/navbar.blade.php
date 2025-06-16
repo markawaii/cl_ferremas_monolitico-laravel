@@ -13,7 +13,7 @@
                 <a href="{{ route('home.index') }}" class="nav-item nav-link active">Inicio</a>
                 <a href="{{ route('admin.producto.index') }}" class="nav-item nav-link">Producto</a>
                 <a href="{{ route('admin.marca.index') }}" class="nav-item nav-link">Marcas</a>
-                <a href="#features" class="nav-item nav-link">Tipo de productos</a>
+                <a href="{{ route('admin.tipo.index') }}" class="nav-item nav-link">Tipo de productos</a>
                 <a href="#pricing" class="nav-item nav-link">Usuarios</a>
                 {{-- <a href="#testimonial" class="nav-item nav-link">Testimonial</a> --}}
                 {{-- <a href="#contact" class="nav-item nav-link">Contact</a>  --}}

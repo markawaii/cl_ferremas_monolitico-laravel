@@ -38,5 +38,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     //TIPO PRODUCTO / CATEGORÍA
 
-    // Route::get('/tipos', [TipoProductoController::class, 'index'])->name('tipos.index');
+    Route::get('/tipo', [TipoProductoController::class, 'index'])->name('tipo.index');
+    Route::get('tiṕo/create', [TipoProductoController::class, 'create'])->name('tipo.create');
+    Route::post('tipo/store', [TipoProductoController::class,  'store'])->name('tipo.store');
+    Route::get('tipo/edit/{id}', [TipoProductoController::class, 'edit'])->name('tipo.edit');
+    Route::put('tipo/update/{id}', [TipoProductoController::class, 'update'])->name('tipo.update');
+    Route::delete('tipo/destroy/{id}', [TipoProductoController::class, 'destroy'])->name('tipo.destroy');
 });
