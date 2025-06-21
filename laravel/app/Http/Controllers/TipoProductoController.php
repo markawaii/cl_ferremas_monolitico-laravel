@@ -16,31 +16,47 @@ class TipoProductoController extends Controller
 
     public function index()
     {
-
         $response = $this->ferremaService->get('tipo-producto/obtener');
 
-        if(!$response || !isset($response['data']))
-        {
+        if (!$response || !isset($response['data'])) {
             return back()->withErrors('No se pudo obtener lan lista de tipos de productos.');
         }
 
-        $tipos = $response['data'];
+        $tipo = $response['data'];
         return view('pages.admin.tipo-producto.index', compact('tipos'));
     }
 
     public function create()
     {
-        dd('llegué al create');
+        // dd('Llegué');
+        return view('pages.admin.tipo-producto.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        dd('llegué al create');
+        $data = $request->all();
+        $data['active'] = $request->has('active') && $request->active === 'on';
+
+        $response = $this->ferremaService->post('tipo-producto/crear', $data);
+
+        if (!$response) {
+            return back()->withErrors('No se pudo crear el tipo de producto.')->withInput();
+        }
+
+        return redirect()->route('admin.tipo.index')->with('success', 'Tipo de Producto creado correctamente.');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        dd('llegué al create');
+        $response = $this->ferremaService->get('tipo-producto/obtener', ['id' => $id]);
+
+        if (!$response || !isset($response['data'])) {
+            return back()->withErrors('No se pudo obtener el tipo de producto');
+        }
+
+        $tipo = $response['data'];
+
+        return view('pages.admin.tipo-producto.edit', compact('tipo'));
     }
 
     public function update()

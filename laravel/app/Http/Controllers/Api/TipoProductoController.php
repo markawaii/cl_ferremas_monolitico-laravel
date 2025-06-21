@@ -8,19 +8,29 @@ use App\Models\TipoProducto;
 
 class TipoProductoController extends Controller
 {
-    public function obtener_tipoprod()
+    public function obtener_tipoprod(Request $request)
     {
-        $tipos = TipoProducto::all();
+        if ($request->filled('id')) {
+            $tipo = TipoProducto::find($request->input('id'));
 
+            if (!$tipo) {
+                return response()->json(['status' => 'error', 'message' => 'Tipo de producto no encontrado', 'data' => null], 404);
+            }
+
+            return response()->json(['status' => 'success', 'data' => $tipo]);
+        }
+
+        $tipos = TipoProducto::all();
         return response()->json(['status' => 'success', 'data' => $tipos]);
     }
 
+
     public function crear_tipoprod(Request $request)
     {
-        $request->validate(['nombre'=>'required|string|max:255', 'active' => 'required|boolean',]);
+        $request->validate(['nombre' => 'required|string|max:255', 'active' => 'required|boolean',]);
 
 
-        $tipo = TipoProducto::create($request->only('nombre', 'status'));
+        $tipo = TipoProducto::create($request->only('nombre', 'active'));
 
         return response()->json(['status' => 'success', 'message' => 'Tipo de producto creado correctamente.', 'data' => $tipo]);
     }
