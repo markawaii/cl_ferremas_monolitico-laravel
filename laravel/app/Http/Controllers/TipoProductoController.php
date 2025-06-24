@@ -76,13 +76,14 @@ class TipoProductoController extends Controller
         return redirect()->route('admin.tipo.index')->with('success', 'Tipo de Producto actualizado correctamente.');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        dd('llegué al create');
-    }
+        $response = $this->ferremaService->delete("tipo-producto/eliminar/{$id}");
 
-    public function show()
-    {
-        dd('llegué al create');
+        if (!$response) {
+            return back()->withErrors('No se pudo eliminar el tipo de producto.');
+        }
+
+        return redirect()->route('admin.tipo.index')->with('success', 'Tipo de Producto eliminado correctamente.');
     }
 }

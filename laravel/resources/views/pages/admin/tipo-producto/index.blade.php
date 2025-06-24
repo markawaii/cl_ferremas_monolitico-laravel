@@ -47,7 +47,7 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form action="{{ route('admin.tipo.destroy', $tipo['id']) }}" method="POST"
-                                        style="display:inline">
+                                        style="display:inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-link text-danger btn-outline-danger"

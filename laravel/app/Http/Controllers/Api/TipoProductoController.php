@@ -64,7 +64,7 @@ class TipoProductoController extends Controller
         }
     }
 
-    public function eliminar_tipoprod($id)
+    public function eliminar_tipoprod(Request $request, $id)
     {
         $tipo = TipoProducto::find($id);
 
@@ -73,6 +73,6 @@ class TipoProductoController extends Controller
         }
 
         $tipo->delete();
-        return response()->json(['status' => 'success', 'message' => 'Tipo eliminado']);
+        return response()->json(['status' => 'success', 'message' => 'Tipo eliminado correctamente.']);
     }
 }
