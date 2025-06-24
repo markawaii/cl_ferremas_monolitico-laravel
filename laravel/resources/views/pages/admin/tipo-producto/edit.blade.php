@@ -23,8 +23,8 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="name" class="form-label">Nombre de el Tipo de Producto</label>
-                <input type="text" name="name" class="form-control" value="{{ old('nombre', $tipo['nombre']) }}" required>
+                <label for="nombre" class="form-label">Nombre de el Tipo de Producto</label>
+                <input type="text" name="nombre" class="form-control" value="{{ old('nombre', $tipo['nombre']) }}" required>
             </div>
 
             <div class="form-check mb-3">

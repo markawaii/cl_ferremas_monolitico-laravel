@@ -24,7 +24,6 @@ class TipoProductoController extends Controller
         return response()->json(['status' => 'success', 'data' => $tipos]);
     }
 
-
     public function crear_tipoprod(Request $request)
     {
         $request->validate(['nombre' => 'required|string|max:255', 'active' => 'required|boolean',]);
@@ -37,16 +36,32 @@ class TipoProductoController extends Controller
 
     public function modificar_tipoprod(Request $request, $id)
     {
-        $tipo = TipoProducto::find($id);
+        try {
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'active' => 'required|boolean',
+            ]);
 
-        if (!$tipo) {
-            return response()->json(['status' => 'error', 'message' => 'Tipo no encontrado'], 404);
+            $tipo = TipoProducto::find($id);
+
+            if (!$tipo) {
+                return response()->json(['status' => 'error', 'message' => 'Tipo no encontrado'], 404);
+            }
+
+            $tipo->update($request->only('nombre', 'active'));
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Tipo de producto actualizado correctamente.',
+                'data' => $tipo,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Excepción detectada',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        $request->validate(['nombre' => 'sometimes|required|string|max:255', 'active' => 'sometimes|required|boolean',]);
-
-        $tipo->update($request->only('nombre', 'active'));
-        return response()->json(['status' => 'success', 'message' => 'Tipo de producto actualizado correctamente.', 'data' => $tipo]);
     }
 
     public function eliminar_tipoprod($id)

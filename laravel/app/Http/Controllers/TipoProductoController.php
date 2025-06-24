@@ -22,7 +22,7 @@ class TipoProductoController extends Controller
             return back()->withErrors('No se pudo obtener lan lista de tipos de productos.');
         }
 
-        $tipo = $response['data'];
+        $tipos = $response['data'];
         return view('pages.admin.tipo-producto.index', compact('tipos'));
     }
 
@@ -51,7 +51,7 @@ class TipoProductoController extends Controller
         $response = $this->ferremaService->get('tipo-producto/obtener', ['id' => $id]);
 
         if (!$response || !isset($response['data'])) {
-            return back()->withErrors('No se pudo obtener el tipo de producto');
+            return back()->withErrors('No se pudo obtener el tipo de producto.');
         }
 
         $tipo = $response['data'];
@@ -59,9 +59,21 @@ class TipoProductoController extends Controller
         return view('pages.admin.tipo-producto.edit', compact('tipo'));
     }
 
-    public function update()
+
+    public function update(Request $request, $id)
     {
-        dd('llegué al create');
+        $data = [
+            'id' => $id,
+            'nombre' => $request->input('nombre'),
+            'active' => $request->has('active') ? 1 : 0,
+        ];
+
+        $response = $this->ferremaService->put("tipo-producto/modificar/{$id}", $data);
+        if (!$response) {
+            return back()->withErrors('Ocurrió un error al actualizar el Tipo de Producto.');
+        }
+
+        return redirect()->route('admin.tipo.index')->with('success', 'Tipo de Producto actualizado correctamente.');
     }
 
     public function destroy()

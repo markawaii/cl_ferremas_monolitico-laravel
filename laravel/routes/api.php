@@ -20,7 +20,7 @@ Route::prefix('producto')->group(function () {
 Route::prefix('tipo-producto')->group(function () {
     Route::get('/obtener', [TipoProductoController::class, 'obtener_tipoprod']);
     Route::post('/crear', [TipoProductoController::class, 'crear_tipoprod']);
-    Route::put('/modificar', [TipoProductoController::class, 'modificar_tipoprod']);
+    Route::put('/modificar/{id}', [TipoProductoController::class, 'modificar_tipoprod']);
     Route::delete('/eliminar', [TipoProductoController::class, 'eliminar_tipoprod']);
 });
 
@@ -28,14 +28,6 @@ Route::prefix('tipo-producto')->group(function () {
 Route::prefix('marca')->group(function () {
     Route::get('/obtener', [MarcaController::class, 'obtener_marcas']);
     Route::post('/crear', [MarcaController::class, 'crear_marca']);
-    Route::put('/modificar', [MarcaController::class, 'modificar_marca']);
+    Route::put('/modificar/{id}', [MarcaController::class, 'modificar_marca']);
     Route::delete('/eliminar', [MarcaController::class, 'eliminar_marca']);
 });
-
-// Prefijo para Precio Historico
-
-Route::prefix('precio-historico')->group(function () {
-    Route::get('listar/{id}', [PrecioHistoricoController::class, 'listar_precio']);
-    Route::post('/crear', [PrecioHistoricoController::class, 'crear_historico_precio']);
-});
-
