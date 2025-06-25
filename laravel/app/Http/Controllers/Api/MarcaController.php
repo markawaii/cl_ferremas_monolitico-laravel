@@ -41,32 +41,41 @@ class MarcaController extends Controller
         $marca = Marca::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'active' => $request->input('active') ? true : false,
+            'active' => $request->input('active'),
         ]);
 
-        $respuesta = [
-            'brand_id' => $marca->id,
-        ];
-
-        return response()->json(['status' => 'success', 'message' => 'Marca creada correctamente', 'data' => $respuesta]);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Marca creada correctamente',
+            'data' => ['brand_id' => $marca->id]
+        ]);
     }
+
 
     public function modificar_marca(Request $request)
     {
-        $id = $request->input('id');
-        $marca = Marca::find($id);
+        try {
+            $id = $request->input('id');
+            $marca = Marca::find($id);
 
-        if (!$marca) {
-            return response()->json(['status' => 'error', 'message' => 'Marca no encontrada']);
+            if (!$marca) {
+                return response()->json(['status' => 'error', 'message' => 'Marca no encontrada']);
+            }
+
+            $marca->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'active' => $request->has('active') ? 1 : 0,
+            ]);
+
+            return response()->json(['status' => 'success', 'message' => 'Marca actualizada correctamente', 'data' => $marca]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Excepción detectada',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        $marca->update([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'active' => $request->has('active') ? 1 : 0,
-        ]);
-
-        return response()->json(['status' => 'success', 'message' => 'Marca actualizada correctamente', 'data' => $marca]);
     }
 
     public function eliminar_marca(Request $request)

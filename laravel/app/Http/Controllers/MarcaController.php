@@ -48,8 +48,6 @@ class MarcaController extends Controller
         }
 
         return redirect()->route('admin.marca.index')->with('sucess', 'Marca creada correctamente');
-
-
     }
 
     public function edit($id)
