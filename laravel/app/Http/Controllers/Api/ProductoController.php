@@ -74,6 +74,16 @@ class ProductoController extends Controller
             return response()->json(['message' => 'Producto no encontrado'], 404);
         }
 
+        if (!$producto['active']) {
+            return response()->json(['message' => 'error', 'message' => 'No se puede eliminar un producto que está activo'], 409);
+        }
+
+        $stock = intval($producto['stock']);
+
+        if ($stock > 0) {
+            return response()->json(['status' => 'error', 'message' => 'No se puede eliminar un producto con stock'], 409);
+        }
+
         $producto->delete();
 
         return response()->json(['message' => 'Producto eliminado']);

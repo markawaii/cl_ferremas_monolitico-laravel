@@ -40,7 +40,7 @@ class ProductoController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:1',
             'description' => 'nullable|string',
             'stock' => 'required|integer',
             'sku' => 'nullable|string|max:100',

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Producto;
 use App\Models\TipoProducto;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TipoProductoController extends Controller
 {
@@ -63,6 +64,14 @@ class TipoProductoController extends Controller
     public function eliminar_tipoprod(Request $request, $id)
     {
         $tipo = TipoProducto::find($id);
+
+        $productos = Producto::where('type_id', $tipo['id'])->count();
+
+        //Si la cantidad de productos es mayor a 0, retornamos mensaje de error indicando que no se puede borrar una marca con un producto asignado
+
+        if($productos > 0) {
+            return response()->json(['status' => 'error', 'message' => 'No se puede eliminar el tipo de producto asignado a un producto'], 409);
+        }
 
         if (!$tipo) {
             return response()->json(['status' => 'error', 'message' => 'Tipo no encontrado'], 404);
