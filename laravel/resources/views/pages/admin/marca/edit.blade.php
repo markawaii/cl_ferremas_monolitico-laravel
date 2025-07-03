@@ -30,11 +30,12 @@
 
             <div>
                 <label for="description" class="form-label">Descripción</label>
-                <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+                <input type="text" name="description" class="form-control" value="{{ $marca['description'] }}">
             </div>
 
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" name="active" id="active" {{ $marca['active'] ? 'checked' : '' }}>
+                <input class="form-check-input" type="checkbox" name="active" id="active"
+                    {{ $marca['active'] ? 'checked' : '' }}>
                 <label class="form-check-label" for="active">Marca Activa</label>
             </div>
 

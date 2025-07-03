@@ -65,8 +65,9 @@ class TipoProductoController extends Controller
         $data = [
             'id' => $id,
             'nombre' => $request->input('nombre'),
-            'active' => $request->has('active') ? 1 : 0,
         ];
+
+        $data['active'] = $request->input('active') === 'on';
 
         $response = $this->ferremaService->put("tipo-producto/modificar/{$id}", $data);
         if (!$response) {

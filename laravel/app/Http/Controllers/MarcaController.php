@@ -61,7 +61,6 @@ class MarcaController extends Controller
         $marca = $response['data'];
 
         return view('pages.admin.marca.edit', compact('marca'));
-
     }
 
     public function update(Request $request, $id)
@@ -71,18 +70,24 @@ class MarcaController extends Controller
             'description' => 'nullable|string|max:255',
         ]);
 
-        $data['active'] = $request->has('active') ? 1 : 0;
+        // Convertir 'active' a 1 si viene como 'on', si no, a 0
+        $data['active'] = $request->input('active') === 'on';
 
+        // Agregar el ID al array de datos
         $data['id'] = $id;
 
+        // Enviar los datos a la API o servicio
         $response = $this->ferremaService->put('marca/modificar', $data);
 
+        // Verificar si hubo error en la respuesta
         if (!$response) {
             return back()->withErrors('Ocurrió un error al actualizar la marca.');
         }
 
+        // Redirigir con mensaje de éxito
         return redirect()->route('admin.marca.index')->with('success', 'Marca actualizada correctamente.');
     }
+
 
     public function destroy($id)
     {

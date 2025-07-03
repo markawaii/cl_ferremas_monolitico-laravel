@@ -65,16 +65,12 @@ class MarcaController extends Controller
             $marca->update([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
-                'active' => $request->has('active') ? 1 : 0,
+                'active' => $request->input('active'),
             ]);
 
             return response()->json(['status' => 'success', 'message' => 'Marca actualizada correctamente', 'data' => $marca]);
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Excepción detectada',
-                'error' => $e->getMessage(),
-            ], 500);
+            return response()->json(['status' => 'error', 'message' => 'Excepción detectada',], 500);
         }
     }
 
