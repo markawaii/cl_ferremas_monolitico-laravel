@@ -71,11 +71,11 @@ class ProductoController extends Controller
         $producto = Producto::find($id);
 
         if (!$producto) {
-            return response()->json(['message' => 'Producto no encontrado'], 404);
+            return response()->json(['status' => 'error', 'message' => 'Producto no encontrado'], 404);
         }
 
-        if (!$producto['active']) {
-            return response()->json(['message' => 'error', 'message' => 'No se puede eliminar un producto que está activo'], 409);
+        if ($producto['active']) {
+            return response()->json(['status' => 'error', 'message' => 'No se puede eliminar un producto que está activo'], 409);
         }
 
         $stock = intval($producto['stock']);
@@ -86,8 +86,9 @@ class ProductoController extends Controller
 
         $producto->delete();
 
-        return response()->json(['message' => 'Producto eliminado']);
+        return response()->json(['status' => 'success', 'message' => 'Producto eliminado']);
     }
+
 
     public function modificar_producto(Request $request)
     {

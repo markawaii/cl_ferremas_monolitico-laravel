@@ -29,7 +29,7 @@ Route::prefix('marca')->group(function () {
     Route::get('/obtener', [MarcaController::class, 'obtener_marcas']);
     Route::post('/crear', [MarcaController::class, 'crear_marca']);
     Route::put('/modificar', [MarcaController::class, 'modificar_marca']);
-    Route::delete('/eliminar', [MarcaController::class, 'eliminar_marca']);
+    Route::delete('/eliminar/{id}', [MarcaController::class, 'eliminar_marca']);
 });
 
 // Prefijo para Precio Historico

@@ -35,7 +35,7 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|unique:marcas,name|max:255',
             'description' => 'nullable|string',
         ]);
 
